@@ -1,0 +1,16 @@
+{
+  "name": "ai_opp",
+  "version": "1.0.0",
+  "description": "A voice-powered AI system that discovers, classifies, prioritizes, and recommends opportunities from across the internet for students, graduates, researchers, professionals, job seekers, founders, and career switchers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "n8n": "^1.97.1"
+  }
+}
