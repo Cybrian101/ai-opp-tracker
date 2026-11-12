@@ -172,11 +172,11 @@ export default function SkillMapModule({ onBuildSkill }) {
             </div>
             <div>
               <p className="text-text-muted mb-1">Unlocks</p>
-              {around.unlocks.length ? around.unlocks.slice(0, 6).map((u) => <p key={u.id} className="text-text-primary">• {u.label}</p>) : <p className="text-text-muted">—</p>}
+              {around.unlocks.length ? around.unlocks.slice(0, 6).map((u) => <p key={u.id} className="text-text-primary">• {u.label}</p>) : <p className="text-text-muted">None</p>}
             </div>
             <div>
               <p className="text-text-muted mb-1">Roles that need it</p>
-              {around.roles.length ? around.roles.slice(0, 6).map((r) => <p key={r.id} className="text-text-primary">• {r.label} <span className="text-text-muted">({WEIGHT_LABEL[r.weight]})</span></p>) : <p className="text-text-muted">—</p>}
+              {around.roles.length ? around.roles.slice(0, 6).map((r) => <p key={r.id} className="text-text-primary">• {r.label} <span className="text-text-muted">({WEIGHT_LABEL[r.weight]})</span></p>) : <p className="text-text-muted">None</p>}
             </div>
           </div>
           {selected.type === 'skill' && onBuildSkill && !have.has(selected.id) && (

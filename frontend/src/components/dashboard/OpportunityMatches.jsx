@@ -183,7 +183,7 @@ export default function OpportunityMatches({ matches = [] }) {
   }, [matches, effectiveMinScore, dashboardFilterQuery, traitFilters, showWomen])
 
   function handleSave(opp) {
-    // Client-side only bookmark for this session — nothing is persisted server-side.
+    // Client-side only bookmark for this session; nothing is persisted server-side.
     toggleSaved(opp.id)
   }
 

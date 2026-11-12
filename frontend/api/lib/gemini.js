@@ -54,7 +54,7 @@ async function callGemini(genAI, modelName, prompt, jsonMode, { thinkingBudget, 
 
 /**
  * Tries the platform's default key first, then falls back to a user-supplied key
- * (used only for this single call — never stored or logged).
+ * (used only for this single call, never stored or logged).
  * options: { tier: 'quality'|'fast', thinkingBudget, maxOutputTokens }
  */
 async function generateContent(prompt, jsonMode = true, userApiKey = null, options = {}) {
@@ -90,7 +90,7 @@ async function generateContent(prompt, jsonMode = true, userApiKey = null, optio
         // Free-tier 503 "high demand" and per-minute 429s are transient: back off and retry.
         const isTransient = /503|overloaded|high demand|unavailable|429|rate limit|per ?minute/i.test(msg) && !/per ?day/i.test(msg);
         const isKeyIssue = !isTransient && /API key not valid|quota|permission|API_KEY_INVALID/i.test(msg);
-        if (isKeyIssue) break; // don't retry this key — move to the next one (if any)
+        if (isKeyIssue) break; // don't retry this key; move to the next one (if any)
         if (attempt < MAX_ATTEMPTS) await sleep((isTransient ? 2500 : 800) * attempt);
       }
     }

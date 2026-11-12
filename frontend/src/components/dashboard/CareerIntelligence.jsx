@@ -140,7 +140,7 @@ export default function CareerIntelligence({ analysis }) {
           label="Career Readiness"
           sublabel="Preparedness score"
         />
-        {/* Domain Fit — text badge */}
+        {/* Domain Fit: text badge */}
         <div className="flex flex-col items-center gap-2">
           <div className="w-[120px] h-[120px] rounded-full flex items-center justify-center"
             style={{

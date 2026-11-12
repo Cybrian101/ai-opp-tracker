@@ -123,7 +123,7 @@ export default function CareerRoadmap({ plan30Days, plan90Days, plan180Days }) {
         <h3 className="text-lg font-semibold text-text-primary">Career Roadmap</h3>
       </div>
 
-      {/* 3 phase columns — horizontal on desktop, stacked on mobile */}
+      {/* 3 phase columns: horizontal on desktop, stacked on mobile */}
       <div className="flex flex-col sm:flex-row gap-4">
         {phases.map((phase) => (
           <PhaseColumn key={phase.key} phase={phase} items={phase.items} />

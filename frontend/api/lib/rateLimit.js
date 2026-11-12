@@ -1,7 +1,7 @@
 'use strict';
 
 // Best-effort in-memory fallback used when no KV store is configured, or if
-// the KV store errors. Resets on cold start — fine as a soft limit only.
+// the KV store errors. Resets on cold start, which is fine as a soft limit only.
 const memoryStore = new Map();
 
 const MAX_USES = parseInt(process.env.RATE_LIMIT_MAX || '1', 10);
@@ -42,7 +42,7 @@ function checkRateLimitMemory(ip, bucket, max) {
 
 /**
  * Enforces N uses per IP within a rolling window. Nothing stored here is
- * ever the user's data — only a counter keyed by IP address, auto-expiring.
+ * ever the user's data: only a counter keyed by IP address, auto-expiring.
  * `bucket` keeps separate counters (e.g. resume analysis vs. module runs).
  */
 async function checkRateLimit(ip, { bucket = 'analyze', max = MAX_USES } = {}) {

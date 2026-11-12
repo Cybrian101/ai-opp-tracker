@@ -235,6 +235,16 @@ test('foreign-script words are removed from translated text, and legitimate text
   assert.equal(out.opener, 'நல்லது முயற்சி');
 });
 
+test('em and en dashes in model text become plain punctuation', () => {
+  const { cleanDashes, str } = require('./shared');
+  assert.equal(cleanDashes('Good base \u2014 keep going'), 'Good base, keep going');
+  assert.equal(cleanDashes('Plan for 5\u20137 hours'), 'Plan for 5-7 hours');
+  assert.equal(str('  \u2014 starts with one'), 'starts with one');
+  const out = registry.tldr.normalize({ opener: 'Solid start \u2014 now build on it' }, { input: { tone: 'steady', average: 60 }, language: 'en' });
+  assert.ok(!/[\u2013\u2014]/.test(out.opener));
+  assert.match(require('./shared').GROUNDING_RULES, /no em dashes/);
+});
+
 test('Kannada is supported: directive names it, and only Kannada, Latin and common characters survive', () => {
   const { stripForeignScripts, languageDirective, LANGUAGES } = require('./shared');
   assert.match(LANGUAGES.kn, /Kannada/);

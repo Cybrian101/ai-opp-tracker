@@ -43,13 +43,48 @@ function waitForCombo(timeoutMs = 6000) {
   })
 }
 
-/** @param {'en'|'ta'|'hi'|'kn'} code  @returns {Promise<boolean>} false if the translator could not load */
-export async function setPageLanguage(code) {
+/** Starts loading the translator without changing anything. Called when the user reaches for the language picker, so
+ * the script is ready by the time a language is chosen. English-only visitors never load it. */
+export function preloadPageTranslator() {
+  loadWidget()
+}
+
+/** Resolves true once the widget has actually rewritten some text on the page, false if that does not happen in time. */
+function waitForTranslation(timeoutMs = 5000) {
+  return new Promise((resolve) => {
+    const started = Date.now()
+    const tick = () => {
+      if (document.querySelector('#root font')) resolve(true)
+      else if (Date.now() - started > timeoutMs) resolve(false)
+      else setTimeout(tick, 150)
+    }
+    tick()
+  })
+}
+
+/**
+ * @param {'en'|'ta'|'hi'|'kn'} code
+ * @param {(status: 'working' | 'done' | 'failed') => void} [onStatus] lets the interface show progress or a failure
+ * @returns {Promise<boolean>} false if the translator could not load or did not translate
+ */
+export async function setPageLanguage(code, onStatus = () => {}) {
   if (code === 'en' && !document.querySelector('select.goog-te-combo')) return true // nothing was translated yet
-  if (!(await loadWidget())) return false
+  onStatus('working')
+  if (!(await loadWidget())) { onStatus('failed'); return false }
   const combo = await waitForCombo()
-  if (!combo) return false
-  combo.value = code === 'en' ? '' : code
-  combo.dispatchEvent(new Event('change'))
-  return true
+  if (!combo) { onStatus('failed'); return false }
+  const value = code === 'en' ? '' : code
+  const apply = () => {
+    combo.value = value
+    combo.dispatchEvent(new Event('change'))
+  }
+  apply()
+  // The widget sometimes ignores the first change event, so apply it once more a moment later.
+  setTimeout(() => {
+    if (!document.documentElement.classList.contains('translated-ltr') === (code !== 'en')) apply()
+  }, 400)
+  if (code === 'en') { onStatus('done'); return true }
+  const translated = await waitForTranslation()
+  onStatus(translated ? 'done' : 'failed')
+  return translated
 }

@@ -272,7 +272,7 @@ export default function ResumeUpload({
                 className="w-full bg-navy-900/60 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-accent-cyan/50 transition-colors"
               />
               <p className="text-[11px] text-text-muted mt-2 leading-relaxed">
-                We only fall back to this key if the shared quota is exhausted. It stays in your browser tab's memory and is sent only with your requests — never saved anywhere.
+                We only fall back to this key if the shared quota is exhausted. It stays in your browser tab's memory and is sent only with your requests, and never saved anywhere.
               </p>
             </motion.div>
           )}

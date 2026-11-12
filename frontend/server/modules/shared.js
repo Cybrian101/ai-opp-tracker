@@ -1,7 +1,7 @@
 'use strict';
 
 // Helpers shared by every module. A module is a small file that exports
-// { id, label, inputSchema?, buildPrompt(ctx), normalize(raw, ctx) } — see registry.js.
+// { id, label, inputSchema?, buildPrompt(ctx), normalize(raw, ctx) }; see registry.js.
 
 const LANGUAGES = {
   en: 'English',
@@ -21,6 +21,7 @@ const GROUNDING_RULES = `GROUNDING RULES (very important):
 - Never invent employers, degrees, certifications, achievements, salaries, or statistics. If the evidence is thin, say so plainly or return fewer items rather than padding.
 - Be honest, not flattering. Name real weaknesses.
 - Be respectful and non-patronising. Never assume the candidate's gender, family status, or the reason for any gap in their history. Address the candidate directly as "you" (or by name); never use he, she, him, her, his or hers for them. Do not give legal advice (including about disclosure or discrimination). The candidate decides what to share.
+- Write plainly, like a person: no em dashes or en dashes (use commas, colons or full stops), no hype words, no filler openers.
 - Return ONLY a JSON object, no commentary.`;
 
 // Language models occasionally drop a word in the wrong script into another language's sentence (for example a Bengali
@@ -39,8 +40,16 @@ function stripForeignScripts(text, lang) {
     .trim();
 }
 
+// Models like to write em and en dashes. Replace them with plain punctuation: a hyphen inside number ranges, a comma elsewhere.
+function cleanDashes(text) {
+  return String(text)
+    .replace(/(\d)\s*[\u2013\u2014]\s*(\d)/g, '$1-$2')
+    .replace(/\s*[\u2013\u2014]\s*/g, ', ')
+    .replace(/^,\s*/, '');
+}
+
 function str(v, fallback = '') {
-  return typeof v === 'string' ? v.trim() : fallback;
+  return typeof v === 'string' ? cleanDashes(v.trim()) : fallback;
 }
 
 function arr(v) {
@@ -125,6 +134,7 @@ module.exports = {
   GROUNDING_RULES,
   buildCandidateBrief,
   stripForeignScripts,
+  cleanDashes,
   str,
   arr,
   strArr,

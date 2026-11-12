@@ -5,7 +5,7 @@
 // The model can only choose ids from the list it was shown, so it can never invent a listing or a link.
 // If the call fails, a deterministic shortlist is used instead.
 
-const { languageDirective } = require('../../server/modules/shared');
+const { languageDirective, cleanDashes } = require('../../server/modules/shared');
 
 const MAX_PICKS = 14;
 const MIN_FALLBACK_SCORE = 48;
@@ -60,6 +60,7 @@ RULES
 - Exclude: a different field from the candidate's roles and skills; a seniority mismatch (asks far more years than they have, or far fewer than a senior person would take); eligibility they do not meet (for example student-only programmes for an experienced professional); near-duplicates (keep the best one).
 - score is 0-100 and honest: 80+ means they could apply today with a strong chance; 60-79 is a reasonable fit with a gap; below 60 is a stretch.
 - reason: one short sentence (max 22 words) naming the resume evidence (a skill, project or experience) that makes it fit, or the main gap. Never invent facts about the candidate or the job.
+- Write plainly: no em dashes or en dashes, no hype words.
 - Use only ids from the list above.${languageDirective(language)}
 
 Return ONLY JSON: {"picks":[{"id":"...","score":0,"reason":"..."}]}`;
@@ -78,7 +79,7 @@ function normalizeCuration(raw, validIds, max = MAX_PICKS) {
     out.push({
       id: p.id,
       score: Number.isFinite(score) ? Math.max(0, Math.min(100, Math.round(score))) : null,
-      reason: typeof p.reason === 'string' ? p.reason.trim().slice(0, 220) : '',
+      reason: typeof p.reason === 'string' ? cleanDashes(p.reason.trim()).slice(0, 220) : '',
     });
     if (out.length >= max) break;
   }

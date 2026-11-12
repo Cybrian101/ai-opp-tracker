@@ -103,12 +103,20 @@ const scores = {
   'accenture-career-reboot': [80, 'A structured return-to-work programme for breaks of over 24 months.', []],
   'google-career-certificates': [58, 'A flexible way to add current, recognised skills.', []],
   ctet: [35, 'Relevant only if you move into school teaching.', []],
+  'gh-pubmatic-5173030008': [82, 'A Java and SQL backend role asking for 3+ years; your five years of Spring Boot fit well.', ['Docker']],
+  'amazon-10594189': [79, 'Asks for 2+ years of Java; your five years of production backend work match.', ['Cloud']],
+  'gh-coinbase-8165441': [74, 'A remote backend role asking for 3+ years; your Java depth and careful design fit.', ['Cloud']],
+  'amazon-10602542': [72, 'Asks for 3+ years of software development; your delivery record fits.', ['Cloud']],
+  'gh-twilio-7781659': [68, 'A remote engineering role asking for 3+ years; SQL and Python are enough to start.', ['Python']],
+  'gh-mongodb-8143980': [66, 'Application engineering asking for 4+ years; strong Java, but database depth is the gap.', ['Cloud']],
 }
 
+// Only listings with a hand-written score are shown, the way the real app shows only what suits the candidate.
 const matches = opportunities
+  .filter((o) => scores[o.id])
   .map((o) => {
     const m = scores[o.id]
-    return { ...o, matchScore: m ? m[0] : 40, matchExplanation: m ? m[1] : '', skillGap: m ? m[2] : [] }
+    return { ...o, matchScore: m[0], matchExplanation: m[1], skillGap: m[2] }
   })
   .sort((a, b) => b.matchScore - a.matchScore)
 

@@ -8,7 +8,7 @@ const http = require('http');
 const path = require('path');
 const fs = require('fs');
 
-// Minimal .env loader (this is a plain Node process, not Vite — Vite loading
+// Minimal .env loader (this is a plain Node process, not Vite. Vite loading
 // .env only affects Vite's own process, not this one). Avoids adding the
 // `dotenv` package as a dependency for a two-line need.
 function loadEnvFile(envPath) {

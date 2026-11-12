@@ -82,7 +82,7 @@
       "prototyping",
       "teamwork"
     ],
-    "summary": "The largest hub of ongoing hackathons across every domain — a good way to build portfolio projects and meet recruiters.",
+    "summary": "The largest hub of ongoing hackathons across every domain. A good way to build portfolio projects and meet recruiters.",
     "application_url": "https://devpost.com/hackathons",
     "degreeRequired": false,
     "skillsBased": true
@@ -131,7 +131,7 @@
   },
   {
     "id": "linkedin-jobs",
-    "title": "LinkedIn Jobs — Entry Level Tech Roles",
+    "title": "LinkedIn Jobs: Entry Level Tech Roles",
     "organization": "LinkedIn",
     "category": [
       "job"
@@ -146,7 +146,7 @@
       "networking",
       "full-time"
     ],
-    "summary": "The largest professional job board — use skill and location filters to find roles matching your resume.",
+    "summary": "The largest professional job board. Use skill and location filters to find roles matching your resume.",
     "application_url": "https://www.linkedin.com/jobs"
   },
   {
@@ -173,7 +173,7 @@
   },
   {
     "id": "google-careers",
-    "title": "Google Careers — University & Entry-Level",
+    "title": "Google Careers: University & Entry-Level",
     "organization": "Google",
     "category": [
       "job",
@@ -194,7 +194,7 @@
   },
   {
     "id": "microsoft-careers",
-    "title": "Microsoft Careers — Students & Grads",
+    "title": "Microsoft Careers: Students & Grads",
     "organization": "Microsoft",
     "category": [
       "job",

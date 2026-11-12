@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Zap, Download, RefreshCw, CheckCircle, Languages } from 'lucide-react'
 import useOpportunityStore from './stores/opportunityStore'
 import { LANGUAGES } from './lib/languages'
-import { setPageLanguage } from './lib/pageTranslate'
+import { setPageLanguage, preloadPageTranslator } from './lib/pageTranslate'
 import { downloadBundle } from './lib/exportBundle'
 import { TABS } from './modules'
 import TldrCard from './components/dashboard/TldrCard'
@@ -26,7 +26,7 @@ function initPipelineSteps() {
 
 function buildReportText(profile, analysis, matches) {
   const lines = []
-  lines.push(`CAREER INTELLIGENCE REPORT — ${profile?.name || 'Candidate'}`)
+  lines.push(`CAREER INTELLIGENCE REPORT: ${profile?.name || 'Candidate'}`)
   lines.push(`Generated ${new Date().toLocaleString()}`)
   lines.push('')
   if (analysis) {
@@ -42,10 +42,10 @@ function buildReportText(profile, analysis, matches) {
     analysis.improvementAreas.forEach((s) => lines.push(`  - ${s}`))
     lines.push('')
     lines.push('RECOMMENDED ROLES')
-    analysis.recommendedRoles.forEach((r) => lines.push(`  - ${r.role} (${r.matchPercent}%) — ${r.reason}`))
+    analysis.recommendedRoles.forEach((r) => lines.push(`  - ${r.role} (${r.matchPercent}%): ${r.reason}`))
     lines.push('')
     lines.push('SKILL GAPS')
-    analysis.skillGaps.forEach((g) => lines.push(`  - ${g.skill} [${g.priority}] — ${g.learning}`))
+    analysis.skillGaps.forEach((g) => lines.push(`  - ${g.skill} [${g.priority}]: ${g.learning}`))
     lines.push('')
     lines.push('30-DAY PLAN')
     analysis.plan30Days.forEach((s) => lines.push(`  - ${s}`))
@@ -63,7 +63,7 @@ function buildReportText(profile, analysis, matches) {
   if (matches?.length) {
     lines.push('MATCHED OPPORTUNITIES')
     matches.forEach((m) => {
-      lines.push(`  - [${m.matchScore}%] ${m.title} @ ${m.organization} — ${m.application_url}`)
+      lines.push(`  - [${m.matchScore}%] ${m.title} @ ${m.organization}: ${m.application_url}`)
     })
   }
   return lines.join('\n')
@@ -85,6 +85,7 @@ function downloadReport(profile, analysis, matches) {
 function LanguageSelect() {
   const language = useOpportunityStore((s) => s.language)
   const setLanguage = useOpportunityStore((s) => s.setLanguage)
+  const [status, setStatus] = useState('done')
   return (
     <label className="flex items-center gap-1.5 text-xs text-text-muted">
       <Languages className="w-3.5 h-3.5" aria-hidden="true" />
@@ -92,10 +93,12 @@ function LanguageSelect() {
       {/* translate="no": the language names must stay in their own script, not be translated */}
       <select
         translate="no"
+        onFocus={preloadPageTranslator}
+        onPointerEnter={preloadPageTranslator}
         value={language}
         onChange={(e) => {
           setLanguage(e.target.value) // language of the AI-written content
-          setPageLanguage(e.target.value) // language of the buttons and headings (Google page translator)
+          setPageLanguage(e.target.value, setStatus) // language of the buttons and headings (Google page translator)
         }}
         className="bg-navy-800 border border-white/10 rounded-lg px-2 py-1.5 text-xs text-text-primary focus:outline-none focus:border-accent-cyan/50"
       >
@@ -105,6 +108,10 @@ function LanguageSelect() {
           </option>
         ))}
       </select>
+      {/* translate="no" keeps this status line in English so it stays readable if translation fails */}
+      <span translate="no" role="status" aria-live="polite" className={`text-[11px] ${status === 'failed' ? 'text-warning-amber' : 'text-text-muted'}`}>
+        {status === 'working' ? 'Translating...' : status === 'failed' ? 'Translator unavailable' : ''}
+      </span>
     </label>
   )
 }
@@ -281,7 +288,7 @@ export default function App() {
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-text-primary mb-2">Build Your AI Career Profile</h1>
               <p className="text-text-muted">
-                Upload your resume to get instant AI analysis, honest improvement feedback, and matched opportunities — nothing is stored, everything runs in this one request.
+                Upload your resume to get an honest analysis, improvement feedback and matched opportunities. Nothing is stored; everything runs in this one request.
               </p>
             </div>
             <ResumeUpload
@@ -325,7 +332,7 @@ export default function App() {
               <div className="glass-card rounded-2xl p-5 flex items-center gap-3">
                 <CheckCircle className="w-5 h-5 text-success-green flex-shrink-0" />
                 <p className="text-sm text-text-primary flex-1">
-                  Your career intelligence report is ready. Download it now — nothing is saved on our end.
+                  Your career intelligence report is ready. Download it now, because nothing is saved on our end.
                 </p>
                 <button
                   onClick={() => downloadReport(profile, careerAnalysis, opportunityMatches)}

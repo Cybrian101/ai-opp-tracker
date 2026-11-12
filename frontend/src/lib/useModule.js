@@ -55,8 +55,13 @@ export default function useModule(moduleId, { auto = false, input = null } = {})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const key = `${moduleId}|${language}|${JSON.stringify(activeInput ?? {})}`
-  const data = results[key] ?? null
+  const inputKey = JSON.stringify(activeInput ?? {})
+  const key = `${moduleId}|${language}|${inputKey}`
+  const exact = results[key] ?? null
+  // After a language switch the new-language answer takes a few seconds. Until it arrives, keep showing the previous
+  // language's result (the page translator has already translated it), so the screen changes at once and never blanks.
+  const stale = exact ? null : results[Object.keys(results).find((k) => k.startsWith(`${moduleId}|`) && k.endsWith(`|${inputKey}`))] ?? null
+  const data = exact ?? stale
 
   const run = useCallback(
     async (nextInput) => {
@@ -94,9 +99,9 @@ export default function useModule(moduleId, { auto = false, input = null } = {})
 
   // Auto modules fetch when first opened, and again if the language changes.
   useEffect(() => {
-    if (auto && profile && !data && !loading && !error) run()
+    if (auto && profile && !exact && !loading && !error) run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auto, profile, language, data])
+  }, [auto, profile, language, exact])
 
   return { data, loading, error, run, language }
 }

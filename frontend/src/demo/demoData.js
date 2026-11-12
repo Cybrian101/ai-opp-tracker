@@ -86,12 +86,19 @@ const matchScores = {
   'she-codes': [80, 'Community and mentorship fit your goals.', []],
   'adplist-mentorship': [76, 'Free mentoring to close the cloud gap.', []],
   'lfx-mentorship': [55, 'Needs open-source contributions first.', ['Open source']],
+  'amazon-10602226': [72, 'Asks for 1+ years of data engineering; your SQL, Python and internship-style project are the evidence.', ['AWS', 'Airflow']],
+  'amazon-10602129': [70, 'Asks for 1+ years of SQL and Python for analysis; the Canteen Predictor shows both.', ['Unit testing']],
+  'amazon-10596351': [60, 'An entry-level applied science role; Python helps, the modelling depth is the gap.', ['AWS']],
+  'amazon-10551515': [58, 'Software role asking for 1+ years; solid Python, lighter on production engineering.', ['Docker', 'Unit testing']],
+  'nariyukti-techhack-11': [68, 'An open-source AI hackathon for women students; fits your Python and data work.', []],
 }
 
+// Only listings with a hand-written score are shown, the way the real app shows only what suits the candidate.
 const matches = opportunities
+  .filter((o) => matchScores[o.id])
   .map((o) => {
     const m = matchScores[o.id]
-    return { ...o, matchScore: m ? m[0] : 45, matchExplanation: m ? m[1] : '', skillGap: m ? m[2] : [] }
+    return { ...o, matchScore: m[0], matchExplanation: m[1], skillGap: m[2] }
   })
   .sort((a, b) => b.matchScore - a.matchScore)
 

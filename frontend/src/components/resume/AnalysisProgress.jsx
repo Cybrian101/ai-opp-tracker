@@ -49,7 +49,7 @@ export default function AnalysisProgress({ steps = [] }) {
           {runningStep
             ? (PIPELINE_STEPS.find((p) => p.key === runningStep.id)?.label || runningStep.label || 'Processing...')
             : progress === 100
-            ? '✓ All done!'
+            ? 'All done'
             : 'Initializing pipeline...'}
         </p>
       </div>
@@ -166,7 +166,7 @@ export default function AnalysisProgress({ steps = [] }) {
       {/* Footer */}
       <div className="text-center">
         <p className="text-xs text-text-muted">
-          ✨ Powered by AI-Ops — building your complete career intelligence profile
+          Building your complete career profile
         </p>
       </div>
     </div>

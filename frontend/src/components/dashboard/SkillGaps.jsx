@@ -65,9 +65,9 @@ export default function SkillGaps({ skillGaps }) {
         </div>
         <div className="py-8 text-center">
           <div className="w-14 h-14 rounded-2xl bg-success-green/10 border border-success-green/20 flex items-center justify-center mx-auto mb-3">
-            <span className="text-2xl">🎯</span>
+            <svg className="w-6 h-6 text-success-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
           </div>
-          <p className="text-success-green font-semibold">Great! No critical skill gaps identified.</p>
+          <p className="text-success-green font-semibold">No critical skill gaps found.</p>
           <p className="text-text-muted text-sm mt-1">Your profile aligns well with the target roles.</p>
         </div>
       </motion.div>
