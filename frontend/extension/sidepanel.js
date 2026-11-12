@@ -10,8 +10,8 @@ import { THEME_KEY, resolveTheme, nextTheme } from './lib/theme.js'
 // deployed Vercel URL (for example 'https://your-app.vercel.app') and DEFAULT_APP_URL to the same URL, then reload the
 // extension. Users can also override both in Settings. Also update host_permissions in manifest.json if you want the
 // server pre-authorised (not required: the API sends Access-Control-Allow-Origin: *).
-const DEFAULT_API_BASE = 'http://localhost:3001'
-const DEFAULT_APP_URL = 'http://localhost:5173'
+const DEFAULT_API_BASE = 'https://ai-opp-tracker.vercel.app'
+const DEFAULT_APP_URL = 'https://ai-opp-tracker.vercel.app'
 const DEFAULTS = { apiBase: DEFAULT_API_BASE, appUrl: DEFAULT_APP_URL }
 const DECISION = {
   apply: { label: 'Good fit: worth applying', cls: 'apply' },

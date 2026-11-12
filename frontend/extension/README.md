@@ -25,7 +25,7 @@ The sun/moon button in the panel header switches light and dark mode (saved in `
 
 ## After you deploy
 
-1. In `sidepanel.js` set `DEFAULT_API_BASE` and `DEFAULT_APP_URL` to your deployed Vercel URL (they default to localhost). Users can also type the address in **Settings**.
+1. In `sidepanel.js` set `DEFAULT_API_BASE` and `DEFAULT_APP_URL` to your deployed Vercel URL (they now default to https://ai-opp-tracker.vercel.app, so change them only if you host elsewhere). Users can also type the address in **Settings**.
 2. **Host permission is not required.** The API sends `Access-Control-Allow-Origin: *` and answers the preflight on `/api/module`, so the panel's `fetch` works through CORS alone. The `http://localhost:3001/*` entry in `manifest.json` `host_permissions` is harmless and can stay or be removed.
 3. Load it: `chrome://extensions` > Developer mode > **Load unpacked** > choose this `extension/` folder (click Reload after edits).
 4. In the deployed web app, analyse your resume, click **Export for extension** on the Overview page, then import that file in the panel (Settings > Your profile).
