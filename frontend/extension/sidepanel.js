@@ -1,4 +1,4 @@
-import { storage, isExtension, readActivePage, highlight, clearMarks, openUrl, requestAllSites, hasAllSites, onTabChange } from './lib/platform.js'
+import { storage, isExtension, readActivePage, highlight, clearMarks, openUrl, requestAllSites, hasAllSites, onTabChange, describeActiveTab } from './lib/platform.js'
 import { analysePage } from './lib/api.js'
 import { parseBundle } from './lib/profile.js'
 import { buildCsv, makeEntry } from './lib/tracker.js'
@@ -22,7 +22,7 @@ const DECISION = {
 }
 const STATUS_ICON = { met: '✓', partial: '~', missing: '✗' }
 
-const state = { tab: 'analyse', bundle: null, settings: { ...DEFAULTS }, log: [], page: null, result: null, loading: false, error: '', pasted: '', logged: false, marks: '' }
+const state = { tab: 'analyse', bundle: null, settings: { ...DEFAULTS }, log: [], page: null, tabInfo: null, result: null, loading: false, error: '', pasted: '', logged: false, marks: '' }
 const app = document.getElementById('app')
 
 const systemPrefersLight = () => Boolean(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
@@ -180,12 +180,28 @@ async function logApplied() {
   render()
 }
 
+function tabHint() {
+  const t = state.tabInfo
+  if (!isExtension || !t) return null
+  const text = t.state === 'ok' ? t.title || (t.jobLike ? 'Looks like a job page. Press Analyse.' : 'Press Analyse to read this page.')
+    : t.state === 'unknown' ? 'Press Analyse. If it asks, click the PathFound toolbar icon on this tab.'
+    : t.message
+  return h('div', { class: 'title-line', text })
+}
+
+async function refreshTab(change) {
+  state.tabInfo = await describeActiveTab()
+  const same = change && change.reason !== 'activated' && state.page && state.tabInfo.url && state.tabInfo.url === state.page.url
+  if (!state.loading && !same) { state.result = null; state.error = ''; state.page = null; state.logged = false; state.marks = '' }
+  if (state.tab === 'analyse') render()
+}
+
 function viewAnalyse() {
   if (!state.bundle) return setupCard()
   const el = []
   if (!isExtension) el.push(h('div', { class: 'preview', text: 'Preview mode: running as a normal page, so paste the job text below. In Chrome, the extension reads the page you are on.' }))
   el.push(h('div', { class: 'card' },
-    h('div', { class: 'page-line' }, h('div', { class: 'grow' }, h('div', { class: 'host', text: state.page ? host(state.page.url) || 'Pasted text' : isExtension ? 'Current page' : 'Pasted text' }), state.page ? h('div', { class: 'title-line', text: state.page.title }) : null),
+    h('div', { class: 'page-line' }, h('div', { class: 'grow' }, h('div', { class: 'host', text: state.page ? host(state.page.url) || 'Pasted text' : state.tabInfo && state.tabInfo.host ? state.tabInfo.host : isExtension ? 'Current page' : 'Pasted text' }), state.page ? h('div', { class: 'title-line', text: state.page.title }) : tabHint()),
       h('button', { class: 'btn primary', disabled: state.loading, onClick: analyse }, state.loading ? [h('span', { class: 'spinner' }), 'Reading…'] : state.result || state.error ? 'Analyse again' : 'Analyse this page')),
     state.page && state.page.usedSelection ? h('p', { class: 'note', text: 'Analysing the text you selected.' }) : null,
     h('details', isExtension ? {} : { open: true }, h('summary', { text: 'Or paste the job text instead' }), h('textarea', { placeholder: 'Paste the job description, form text or message here…', value: state.pasted, onInput: (e) => { state.pasted = e.target.value } })),
@@ -276,6 +292,7 @@ function render() {
   window.scrollTo(0, scroll)
 }
 
-// A new tab or page load means the old result no longer applies.
-onTabChange(() => { if (!state.loading) { state.result = null; state.error = ''; state.page = null; state.logged = false; if (state.tab === 'analyse') render() } })
+// A different tab or URL means the old result no longer applies. Only the label is refreshed; nothing is read.
+onTabChange(refreshTab)
+if (isExtension) describeActiveTab().then((t) => { state.tabInfo = t; render() })
 load()

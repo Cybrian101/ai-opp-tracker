@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { fileURLToPath } from 'node:url'
+import { mergeFrames } from './extract.js'
 import { runFixture } from './jdHarness.js'
 
 const fixture = (name) => fileURLToPath(new URL(`../fixtures/jd/${name}`, import.meta.url))
@@ -12,6 +13,10 @@ const CASES = [
   { file: 'indeed-job.html', url: 'https://in.indeed.com/viewjob?jk=abc', mustHave: ['SQL', 'Python', 'Tableau'], mustNot: ['Company reviews', 'Similar jobs'] },
   { file: 'careers-jsonld.html', url: 'https://careers.acme.example/jobs/42', mustHave: ['SQL', 'Python'], mustNot: ['Blog Contact'] },
   { file: 'generic-careers-main.html', url: 'https://acme.example/careers/junior-data-analyst', mustHave: ['SQL', 'Python'], mustNot: ['Cookie settings', 'Products Pricing'] },
+  { file: 'greenhouse-board.html', url: 'https://job-boards.greenhouse.io/acme/jobs/1', mustHave: ['SQL', 'Python', 'Tableau'], mustNot: ['Cookie preferences', 'Powered by Greenhouse'] },
+  { file: 'lever-posting.html', url: 'https://jobs.lever.co/acme/abc', mustHave: ['SQL', 'Python', 'Tableau'], mustNot: ['Sales Lead', 'powered by Lever'] },
+  { file: 'workday-spa.html', url: 'https://acme.wd5.myworkdayjobs.com/en-US/careers/job/Pune/Data-Analyst_R1', mustHave: ['SQL', 'Python', 'Tableau'], mustNot: ['Loading...'] },
+  { file: 'naukri-job.html', url: 'https://www.naukri.com/job-listings-data-analyst-acme-1', mustHave: ['SQL', 'Python', 'Tableau'], mustNot: ['Java Developer', 'Accountant Manager'] },
 ]
 
 for (const c of CASES) {
@@ -62,3 +67,11 @@ test('extractPage output is bounded', () => {
 
 import { runExtract } from './jdHarness.js'
 function runFixtureHtml(html) { return runExtract(html, 'https://x.example/big') }
+
+test('job text inside an iframe is merged with the host page (mergeFrames)', () => {
+  const top = { ...read('careers-iframe-host.html', 'https://acme.example/careers'), isTop: true }
+  const inner = { ...read('careers-iframe-inner.html', 'https://boards.example/embed/9'), isTop: false }
+  const page = mergeFrames([{ frameId: 0, result: top }, { frameId: 5, result: inner }])
+  assert.equal(page.url, 'https://acme.example/careers')
+  assert.ok(page.text.includes('Join us') && page.text.includes('Tableau') && page.text.includes('[Embedded content]'))
+})

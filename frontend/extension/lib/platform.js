@@ -2,6 +2,7 @@
 // for design work and tests.
 
 import { extractPage, mergeFrames } from './extract.js'
+import { classifyUrl, describeTab } from './tabinfo.js'
 import { highlightRequirements, clearHighlights } from './highlight.js'
 
 export const isExtension = typeof chrome !== 'undefined' && Boolean(chrome.runtime && chrome.runtime.id)
@@ -24,8 +25,6 @@ export const storage = isExtension
       async clear() { Object.keys(localStorage).filter((k) => k.startsWith('pf:')).forEach((k) => localStorage.removeItem(k)) },
     }
 
-const BLOCKED = /^(chrome|edge|brave|about|chrome-extension|devtools|view-source):|^https:\/\/chromewebstore\.google\.com|^https:\/\/chrome\.google\.com\/webstore/i
-
 export async function getActiveTab() {
   if (!isExtension) return null
   const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
@@ -39,15 +38,16 @@ export async function getActiveTab() {
 export async function readActivePage() {
   const tab = await getActiveTab()
   if (!tab || !tab.id) return { error: 'Open the job page in this window, then try again.' }
-  if (!tab.url || BLOCKED.test(tab.url)) return { error: "Chrome doesn't let extensions read this kind of page. Open the job page itself." }
-  if (/\.pdf($|\?)/i.test(tab.url)) return { error: "PDF job posts can't be read here. Copy the text and paste it below." }
+  // tab.url is undefined until Chrome has granted access to that tab: unknown is not the same as unreadable.
+  const c = classifyUrl(tab.url)
+  if (c.message) return { error: c.message }
   try {
     const frames = await chrome.scripting.executeScript({ target: { tabId: tab.id, allFrames: true }, func: extractPage })
     const page = mergeFrames(frames)
     if (!page || !page.text) return { error: 'Nothing readable was found on this page. Select the job text and try again, or paste it below.' }
     return { page }
   } catch {
-    return { error: 'Click the PathFound icon on the page you want analysed. Chrome only lets it read the page you opened it on. To analyse any page, allow all sites in Settings.' }
+    return { error: 'PathFound can only read a tab after you click its toolbar icon on that tab. Click the icon on this page, or allow all sites in Settings to analyse any tab.', needsAccess: true }
   }
 }
 
@@ -78,8 +78,20 @@ export async function hasAllSites() {
   return chrome.permissions.contains({ origins: ['<all_urls>'] })
 }
 
+export async function describeActiveTab() {
+  return describeTab(await getActiveTab())
+}
+
+/**
+ * Calls back when the tab the user is looking at changes: tab switch, window focus, load complete, or a URL change
+ * on the active tab (single-page sites). Only metadata is observed; nothing is read from any page.
+ * Chrome only reports a tab's url here if the extension has access to it (activeTab grant or all-sites).
+ */
 export function onTabChange(callback) {
   if (!isExtension) return
-  chrome.tabs.onActivated.addListener(callback)
-  chrome.tabs.onUpdated.addListener((id, info) => { if (info.status === 'complete') callback() })
+  chrome.tabs.onActivated.addListener(() => callback({ reason: 'activated' }))
+  chrome.windows.onFocusChanged.addListener((id) => { if (id !== chrome.windows.WINDOW_ID_NONE) callback({ reason: 'focus' }) })
+  chrome.tabs.onUpdated.addListener((id, info, tab) => {
+    if (tab && tab.active && (info.url || info.status === 'complete')) callback({ reason: info.url ? 'url' : 'loaded', url: info.url })
+  })
 }
