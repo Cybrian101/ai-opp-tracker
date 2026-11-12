@@ -8,9 +8,9 @@ function ScoreGauge({ score = 0, size = 100, label }) {
   const strokeDashoffset = circumference - (clampedScore / 100) * circumference
 
   const color =
-    clampedScore >= 70 ? '#10b981' :
-    clampedScore >= 40 ? '#f59e0b' :
-    '#ef4444'
+    clampedScore >= 70 ? 'rgb(var(--c-success))' :
+    clampedScore >= 40 ? 'rgb(var(--c-warning))' :
+    'rgb(var(--c-error))'
 
   return (
     <div className="flex flex-col items-center gap-1">
@@ -22,7 +22,7 @@ function ScoreGauge({ score = 0, size = 100, label }) {
             cy={size / 2}
             r={radius}
             fill="none"
-            stroke="rgba(255,255,255,0.08)"
+            stroke="rgb(var(--c-fg) / calc(0.08 * var(--fg-boost)))"
             strokeWidth={10}
           />
           {/* Animated score ring */}
@@ -109,7 +109,7 @@ export default function CandidateOverview({ profile, analysis }) {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1, type: 'spring', stiffness: 300 }}
-          className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-cyan to-accent-purple flex items-center justify-center text-white text-xl font-bold flex-shrink-0"
+          className="w-16 h-16 rounded-2xl bg-brand flex items-center justify-center text-onaccent text-xl font-bold flex-shrink-0"
         >
           {initials}
         </motion.div>
@@ -173,9 +173,9 @@ export default function CandidateOverview({ profile, analysis }) {
                 transition={{ delay: 0.2 + i * 0.07 }}
                 className="px-3 py-1 rounded-full text-xs font-medium"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15))',
-                  border: '1px solid rgba(0,212,255,0.25)',
-                  color: '#00d4ff',
+                  background: 'linear-gradient(135deg, rgb(var(--c-accent) / calc(0.15 * var(--a-boost))), rgb(var(--c-accent2) / calc(0.15 * var(--a-boost))))',
+                  border: '1px solid rgb(var(--c-accent) / calc(0.25 * var(--a-boost)))',
+                  color: 'rgb(var(--c-accent))',
                 }}
               >
                 {domain}

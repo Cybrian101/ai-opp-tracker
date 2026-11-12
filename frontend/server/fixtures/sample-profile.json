@@ -1,0 +1,48 @@
+{
+  "profile": {
+    "name": "Priya Raman",
+    "degree": "B.Tech Computer Science",
+    "institution": "Anna University",
+    "graduationYear": 2025,
+    "experienceLevel": "fresher",
+    "summary": "Final-year CS graduate who builds small data apps with Python and SQL and organised her college tech fest.",
+    "skills": [
+      { "name": "Python", "category": "programming", "level": "intermediate" },
+      { "name": "SQL", "category": "data", "level": "intermediate" },
+      { "name": "Flask", "category": "programming", "level": "beginner" },
+      { "name": "Pandas", "category": "data", "level": "intermediate" },
+      { "name": "Git", "category": "programming", "level": "beginner" }
+    ],
+    "projects": [
+      {
+        "title": "Campus Canteen Predictor",
+        "technologies": ["Python", "Flask", "SQLite", "Pandas"],
+        "domain": "data",
+        "impact": "Used by 120 students to avoid queues",
+        "description": "REST API plus dashboard that predicts canteen rush hours from order history."
+      }
+    ],
+    "experience": [
+      {
+        "company": "Anna University Tech Fest",
+        "role": "Events Coordinator (volunteer)",
+        "duration": "2023-2024",
+        "description": "Managed a 15-person volunteer team and a Rs 80,000 budget for a 2,000-attendee event."
+      }
+    ],
+    "certifications": [{ "name": "Google Data Analytics Certificate", "issuer": "Coursera", "year": 2024 }],
+    "interests": ["data storytelling", "education"],
+    "preferredDomains": ["data"]
+  },
+  "analysis": {
+    "domainFit": "Data Analytics / Backend",
+    "strengths": ["Python", "SQL", "Data analysis"],
+    "improvementAreas": ["Cloud deployment", "Testing", "System design"],
+    "skillGaps": [
+      { "skill": "Docker", "priority": "high" },
+      { "skill": "AWS", "priority": "high" },
+      { "skill": "Unit testing", "priority": "medium" }
+    ]
+  },
+  "jobDescription": "Junior Data Engineer, Acme Analytics (Bengaluru, hybrid). You will build and maintain ETL pipelines in Python and SQL, orchestrate them with Airflow, load data into a cloud warehouse (BigQuery or Redshift), and containerise services with Docker. Requirements: 0-2 years experience, strong Python and SQL, familiarity with Git and CI, exposure to AWS or GCP, good communication. Nice to have: Spark, dbt, unit testing."
+}

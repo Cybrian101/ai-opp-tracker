@@ -8,14 +8,14 @@ function AnimatedRing({ score = 0, size = 120, label, sublabel }) {
   const strokeDashoffset = circumference - (clampedScore / 100) * circumference
 
   const color =
-    clampedScore >= 70 ? '#10b981' :
-    clampedScore >= 40 ? '#f59e0b' :
-    '#ef4444'
+    clampedScore >= 70 ? 'rgb(var(--c-success))' :
+    clampedScore >= 40 ? 'rgb(var(--c-warning))' :
+    'rgb(var(--c-error))'
 
   const trackColor =
-    clampedScore >= 70 ? 'rgba(16,185,129,0.12)' :
-    clampedScore >= 40 ? 'rgba(245,158,11,0.12)' :
-    'rgba(239,68,68,0.12)'
+    clampedScore >= 70 ? 'rgb(var(--c-success) / calc(0.12 * var(--a-boost)))' :
+    clampedScore >= 40 ? 'rgb(var(--c-warning) / calc(0.12 * var(--a-boost)))' :
+    'rgb(var(--c-error) / calc(0.12 * var(--a-boost)))'
 
   return (
     <div className="flex flex-col items-center gap-2">
@@ -144,8 +144,8 @@ export default function CareerIntelligence({ analysis }) {
         <div className="flex flex-col items-center gap-2">
           <div className="w-[120px] h-[120px] rounded-full flex items-center justify-center"
             style={{
-              background: 'radial-gradient(circle, rgba(124,58,237,0.15) 0%, rgba(0,212,255,0.08) 100%)',
-              border: '6px solid rgba(124,58,237,0.25)',
+              background: 'radial-gradient(circle, rgb(var(--c-accent2) / calc(0.15 * var(--a-boost))) 0%, rgb(var(--c-accent) / calc(0.08 * var(--a-boost))) 100%)',
+              border: '6px solid rgb(var(--c-accent2) / calc(0.25 * var(--a-boost)))',
             }}
           >
             <span className="text-center text-sm font-bold text-accent-purple px-2 leading-tight">

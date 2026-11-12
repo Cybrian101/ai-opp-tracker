@@ -1,89 +1,96 @@
 import { create } from 'zustand'
+import { loadLanguage, saveLanguage } from '../lib/languages'
+import { DEMOS } from '../demo/demoData'
 
-/**
- * Normalize DB snake_case career analysis to camelCase used by components.
- * Handles both camelCase (from Gemini SSE stream) and snake_case (from DB fetch).
- */
 function normalizeCareerAnalysis(raw) {
   if (!raw) return null
   return {
-    // Scores
-    resumeScore:          raw.resumeScore          ?? raw.resume_score          ?? 0,
-    employabilityScore:   raw.employabilityScore   ?? raw.employability_score   ?? 0,
-    careerReadinessScore: raw.careerReadinessScore ?? raw.career_readiness_score ?? 0,
-    // Domain
-    domainFit:            raw.domainFit            ?? raw.domain_fit            ?? 'Technology',
-    // Arrays
-    strengths:            raw.strengths            ?? [],
-    improvementAreas:     raw.improvementAreas     ?? raw.improvement_areas     ?? [],
-    recommendedRoles:     raw.recommendedRoles     ?? raw.recommended_roles     ?? [],
-    skillGaps:            raw.skillGaps            ?? raw.skill_gaps            ?? [],
-    // Roadmap
-    plan30Days:           raw.plan30Days           ?? raw.plan_30_days          ?? [],
-    plan90Days:           raw.plan90Days           ?? raw.plan_90_days          ?? [],
-    plan180Days:          raw.plan180Days          ?? raw.plan_180_days         ?? [],
-    // Narrative
-    aiNarrative:          raw.aiNarrative          ?? raw.ai_narrative          ?? '',
-    // Pass-through for DB fields
-    opportunity_matches:  raw.opportunity_matches  ?? [],
+    resumeScore: raw.resumeScore ?? 0,
+    employabilityScore: raw.employabilityScore ?? 0,
+    careerReadinessScore: raw.careerReadinessScore ?? 0,
+    domainFit: raw.domainFit ?? 'Technology',
+    strengths: raw.strengths ?? [],
+    improvementAreas: raw.improvementAreas ?? [],
+    recommendedRoles: raw.recommendedRoles ?? [],
+    skillGaps: raw.skillGaps ?? [],
+    plan30Days: raw.plan30Days ?? [],
+    plan90Days: raw.plan90Days ?? [],
+    plan180Days: raw.plan180Days ?? [],
+    aiNarrative: raw.aiNarrative ?? '',
   }
 }
 
-const useOpportunityStore = create((set, get) => ({
-  // Opportunities
-  opportunities: [],
+const useOpportunityStore = create((set) => ({
+  profile: null,
+  careerAnalysis: null,
+  opportunityMatches: [],
   savedOpportunities: [],
-  activeCategory: 'all',
-
-  // Agent pipeline
-  agentSteps: [],
-  isSearching: false,
-  currentQuery: '',
   dashboardFilterQuery: '',
   dashboardFilterMinScore: 0,
 
-  // Career Intelligence (normalized camelCase)
-  careerAnalysis: null,
-  opportunityMatches: [],
-  careerStrategy: null,
+  // Preferences. Neither is persisted: the API key stays in memory only, and the language
+  // lives in localStorage purely as a convenience.
+  language: loadLanguage(),
+  apiKey: '',
+  // Module results are cached for the session, keyed by module + language + input.
+  moduleResults: {},
 
-  // Chat
-  chatMessages: [],
-  isChatLoading: false,
+  // Answers from the optional "Returning to work" form. Client state only; joins module prompts once submitted.
+  comeback: null,
+  setComeback: (comeback) => set({ comeback }),
 
-  // Setters
-  setOpportunities: (opportunities) => set({ opportunities }),
+  // Demo mode: sample candidate + canned module results, no resume, no API key, no network.
+  demo: false,
+  demoPersona: null,
+  loadDemo: (personaId = 'returner') => {
+    const persona = DEMOS[personaId] || DEMOS.returner
+    set({
+      demo: true,
+      demoPersona: persona.id,
+      profile: persona.profile,
+      careerAnalysis: normalizeCareerAnalysis(persona.analysis),
+      opportunityMatches: persona.matches,
+      moduleResults: {},
+      // A returning-to-work demo arrives with the form already answered, as if the user had filled it in.
+      comeback: persona.comeback,
+    })
+  },
+
+  setProfile: (profile) => set({ profile }),
   setCareerAnalysis: (raw) => set({ careerAnalysis: normalizeCareerAnalysis(raw) }),
   setOpportunityMatches: (opportunityMatches) => set({ opportunityMatches }),
-  addAgentStep: (step) => set((state) => ({
-    agentSteps: [...state.agentSteps, { ...step, timestamp: new Date().toISOString() }],
-  })),
-  updateAgentStep: (stepId, updates) => set((state) => ({
-    agentSteps: state.agentSteps.map(s => s.stepId === stepId ? { ...s, ...updates } : s),
-  })),
-  clearAgentSteps: () => set({ agentSteps: [] }),
-  setActiveCategory: (category) => set({ activeCategory: category }),
-  setSearching: (bool) => set({ isSearching: bool }),
-  setCareerStrategy: (strategy) => set({ careerStrategy: strategy }),
-  setCurrentQuery: (query) => set({ currentQuery: query }),
-  setDashboardFilter: (query, minScore) => set({ dashboardFilterQuery: query || '', dashboardFilterMinScore: minScore || 0 }),
-  addChatMessage: (message) => set((state) => ({
-    chatMessages: [...state.chatMessages, { ...message, timestamp: new Date().toISOString() }],
-  })),
-  setChatLoading: (bool) => set({ isChatLoading: bool }),
-  toggleSaved: (opportunityId) => set((state) => {
-    const opp = state.opportunityMatches.find((o) => o.id === opportunityId)
-    const isSaved = state.savedOpportunities.some((o) => o.id === opportunityId)
-    if (isSaved) {
-      return { savedOpportunities: state.savedOpportunities.filter((o) => o.id !== opportunityId) }
-    } else {
-      return {
-        savedOpportunities: opp
-          ? [...state.savedOpportunities, { ...opp, isSaved: true }]
-          : state.savedOpportunities,
+  setLanguage: (language) => {
+    saveLanguage(language)
+    set({ language })
+  },
+  setApiKey: (apiKey) => set({ apiKey }),
+  setModuleResult: (key, value) => set((state) => ({ moduleResults: { ...state.moduleResults, [key]: value } })),
+  setDashboardFilter: (query, minScore) =>
+    set({ dashboardFilterQuery: query || '', dashboardFilterMinScore: minScore || 0 }),
+  toggleSaved: (opportunityId) =>
+    set((state) => {
+      const opp = state.opportunityMatches.find((o) => o.id === opportunityId)
+      const isSaved = state.savedOpportunities.some((o) => o.id === opportunityId)
+      if (isSaved) {
+        return { savedOpportunities: state.savedOpportunities.filter((o) => o.id !== opportunityId) }
       }
-    }
-  }),
+      return {
+        savedOpportunities: opp ? [...state.savedOpportunities, { ...opp, isSaved: true }] : state.savedOpportunities,
+      }
+    }),
+  reset: () =>
+    set({
+      profile: null,
+      careerAnalysis: null,
+      opportunityMatches: [],
+      savedOpportunities: [],
+      dashboardFilterQuery: '',
+      dashboardFilterMinScore: 0,
+      moduleResults: {},
+      comeback: null,
+      demo: false,
+      demoPersona: null,
+    }),
 }))
 
 export default useOpportunityStore

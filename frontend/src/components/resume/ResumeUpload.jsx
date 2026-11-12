@@ -1,25 +1,47 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Upload, FileText, X, AlertCircle } from 'lucide-react'
-import { useState } from 'react'
+import { Upload, FileText, X, AlertCircle, KeyRound, ChevronDown } from 'lucide-react'
+import useOpportunityStore from '../../stores/opportunityStore'
+
+const MAX_FILE_BYTES = 3 * 1024 * 1024
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = reader.result
+      // strip the "data:<mime>;base64," prefix
+      const base64 = String(result).split(',')[1] || ''
+      resolve(base64)
+    }
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
 
 export default function ResumeUpload({
-  userId,
+  onDemo,
   onUploadStart,
   onProgress,
-  onComplete,
-  onError,
+  onProfile,
   onCareerAnalysis,
   onOpportunityMatches,
+  onComplete,
+  onError,
 }) {
   const [selectedFile, setSelectedFile] = useState(null)
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
+  const [showKeyField, setShowKeyField] = useState(false)
+  // The key lives in memory only (never persisted) so the career tools can reuse it after analysis.
+  const apiKey = useOpportunityStore((s) => s.apiKey)
+  const setApiKey = useOpportunityStore((s) => s.setApiKey)
+  const language = useOpportunityStore((s) => s.language)
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (rejectedFiles.length > 0) {
-      setUploadError('Only PDF and DOCX files are accepted.')
+      setUploadError('Only PDF and DOCX files are accepted, up to 3 MB.')
       return
     }
     setUploadError('')
@@ -31,10 +53,9 @@ export default function ResumeUpload({
     accept: {
       'application/pdf': ['.pdf'],
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
-      'application/msword': ['.doc'],
     },
     maxFiles: 1,
-    maxSize: 10 * 1024 * 1024,
+    maxSize: MAX_FILE_BYTES,
   })
 
   function formatSize(bytes) {
@@ -50,18 +71,28 @@ export default function ResumeUpload({
     onUploadStart?.()
 
     try {
-      const formData = new FormData()
-      formData.append('resume', selectedFile)
-      formData.append('userId', userId || localStorage.getItem('oia_user_id') || 'anonymous')
+      const fileBase64 = await fileToBase64(selectedFile)
 
-      const response = await fetch('/api/resume/analyze', {
+      const response = await fetch('/api/analyze', {
         method: 'POST',
-        headers: { 'x-user-id': userId || '' },
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileBase64,
+          mimeType: selectedFile.type,
+          apiKey: apiKey.trim() || undefined,
+          language,
+        }),
       })
 
       if (!response.ok) {
-        throw new Error(`Upload failed: ${response.statusText}`)
+        let message = `Upload failed: ${response.statusText}`
+        try {
+          const body = await response.json()
+          if (body?.error) message = body.error
+        } catch {
+          // ignore
+        }
+        throw new Error(message)
       }
 
       const reader = response.body.getReader()
@@ -80,23 +111,20 @@ export default function ResumeUpload({
           const trimmed = line.trim()
           if (!trimmed.startsWith('data:')) continue
           const raw = trimmed.slice(5).trim()
-          if (!raw || raw === '[DONE]') continue
+          if (!raw) continue
 
           try {
             const event = JSON.parse(raw)
             if (event.type === 'step') {
-              onProgress?.({ type: 'step', stepId: event.stepId, message: event.message })
+              onProgress?.({ stepId: event.stepId, message: event.message })
             } else if (event.type === 'profile') {
-              onComplete?.(event.data)
+              onProfile?.(event.data)
             } else if (event.type === 'career_analysis') {
               onCareerAnalysis?.(event.data)
             } else if (event.type === 'opportunity_matches') {
               onOpportunityMatches?.(event.data)
             } else if (event.type === 'complete') {
-              // handled by parent via onComplete or direct navigate
-              if (event.data?.profile) {
-                onComplete?.(event.data.profile)
-              }
+              onComplete?.()
             } else if (event.type === 'error') {
               throw new Error(event.message)
             }
@@ -118,7 +146,7 @@ export default function ResumeUpload({
     <div className="glass-card rounded-2xl p-8 space-y-6">
       <div className="text-center">
         <h2 className="text-xl font-semibold text-text-primary mb-1">Upload Your Resume</h2>
-        <p className="text-text-muted text-sm">PDF or DOCX up to 10 MB</p>
+        <p className="text-text-muted text-sm">PDF or DOCX up to 3 MB</p>
       </div>
 
       {/* Dropzone */}
@@ -184,10 +212,68 @@ export default function ResumeUpload({
                 <p className="text-text-muted text-sm mt-1">or click to browse files</p>
               </div>
               <div className="flex gap-2">
-                {['PDF', 'DOCX', 'DOC'].map((fmt) => (
+                {['PDF', 'DOCX'].map((fmt) => (
                   <span key={fmt} className="badge badge-cyan text-xs">{fmt}</span>
                 ))}
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {onDemo && (
+        <div className="space-y-2">
+          <p className="text-center text-[11px] text-text-muted">No resume handy? Explore a sample candidate. No API key needed.</p>
+          <div className="grid sm:grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => onDemo('returner')}
+              className="py-3 px-3 rounded-xl text-sm font-semibold text-accent-cyan border border-accent-cyan/30 hover:bg-accent-cyan/10 transition-all"
+            >
+              Demo: returning to work
+              <span className="block text-[11px] font-normal text-text-muted mt-0.5">Engineer, five-year career break</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onDemo('graduate')}
+              className="py-3 px-3 rounded-xl text-sm font-semibold text-accent-cyan border border-accent-cyan/30 hover:bg-accent-cyan/10 transition-all"
+            >
+              Demo: recent graduate
+              <span className="block text-[11px] font-normal text-text-muted mt-0.5">Fresher with a data project</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Bring-your-own-key (optional, ephemeral) */}
+      <div className="rounded-xl border border-white/10 bg-white/3 overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setShowKeyField((v) => !v)}
+          className="w-full flex items-center gap-2 px-4 py-3 text-xs text-text-muted hover:text-text-primary transition-colors"
+        >
+          <KeyRound className="w-3.5 h-3.5" />
+          <span className="flex-1 text-left">Using your own Gemini API key? (optional)</span>
+          <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showKeyField ? 'rotate-180' : ''}`} />
+        </button>
+        <AnimatePresence>
+          {showKeyField && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="px-4 pb-4"
+            >
+              <input
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="AIzaSy... (only used for this request, never stored)"
+                className="w-full bg-navy-900/60 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-accent-cyan/50 transition-colors"
+              />
+              <p className="text-[11px] text-text-muted mt-2 leading-relaxed">
+                We only fall back to this key if the shared quota is exhausted. It stays in your browser tab's memory and is sent only with your requests — never saved anywhere.
+              </p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -214,8 +300,8 @@ export default function ResumeUpload({
             exit={{ opacity: 0, y: 10 }}
             onClick={handleUpload}
             disabled={uploading}
-            className="w-full py-3.5 rounded-xl font-semibold text-white flex items-center justify-center gap-2 transition-all disabled:opacity-60"
-            style={{ background: 'linear-gradient(135deg, #00d4ff, #7c3aed)' }}
+            className="w-full py-3.5 rounded-xl font-semibold text-onaccent flex items-center justify-center gap-2 transition-all disabled:opacity-60"
+            style={{ background: 'var(--grad-brand)' }}
           >
             {uploading ? (
               <>

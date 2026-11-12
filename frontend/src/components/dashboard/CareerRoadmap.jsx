@@ -6,25 +6,25 @@ const PHASES = [
   {
     key: 'plan30Days',
     label: '30 Days',
-    color: '#00d4ff',
-    bgColor: 'rgba(0,212,255,0.08)',
-    borderColor: 'rgba(0,212,255,0.25)',
+    color: 'rgb(var(--c-accent))',
+    bgColor: 'rgb(var(--c-accent) / calc(0.08 * var(--a-boost)))',
+    borderColor: 'rgb(var(--c-accent) / calc(0.25 * var(--a-boost)))',
     numberColor: 'text-accent-cyan',
   },
   {
     key: 'plan90Days',
     label: '90 Days',
-    color: '#7c3aed',
-    bgColor: 'rgba(124,58,237,0.08)',
-    borderColor: 'rgba(124,58,237,0.25)',
+    color: 'rgb(var(--c-accent2))',
+    bgColor: 'rgb(var(--c-accent2) / calc(0.08 * var(--a-boost)))',
+    borderColor: 'rgb(var(--c-accent2) / calc(0.25 * var(--a-boost)))',
     numberColor: 'text-accent-purple',
   },
   {
     key: 'plan180Days',
     label: '180 Days',
-    color: '#10b981',
-    bgColor: 'rgba(16,185,129,0.08)',
-    borderColor: 'rgba(16,185,129,0.25)',
+    color: 'rgb(var(--c-success))',
+    bgColor: 'rgb(var(--c-success) / calc(0.08 * var(--a-boost)))',
+    borderColor: 'rgb(var(--c-success) / calc(0.25 * var(--a-boost)))',
     numberColor: 'text-success-green',
   },
 ]
@@ -45,7 +45,7 @@ function PhaseColumn({ phase, items = [] }) {
         <div className="flex items-center gap-2">
           <div
             className="w-3 h-3 rounded-full"
-            style={{ background: phase.color, boxShadow: `0 0 8px ${phase.color}80` }}
+            style={{ background: phase.color, boxShadow: `0 0 8px color-mix(in srgb, ${phase.color} 50%, transparent)` }}
           />
           <span className="font-bold text-text-primary text-sm">{phase.label}</span>
           <span className="text-xs text-text-muted">({items.length} actions)</span>
@@ -73,7 +73,7 @@ function PhaseColumn({ phase, items = [] }) {
               >
                 <span
                   className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5 ${phase.numberColor}`}
-                  style={{ background: `${phase.color}20`, border: `1px solid ${phase.color}40` }}
+                  style={{ background: `color-mix(in srgb, ${phase.color} 13%, transparent)`, border: `1px solid color-mix(in srgb, ${phase.color} 25%, transparent)` }}
                 >
                   {i + 1}
                 </span>

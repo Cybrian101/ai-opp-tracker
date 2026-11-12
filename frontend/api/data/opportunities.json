@@ -1,0 +1,1511 @@
+[
+  {
+    "id": "gsoc",
+    "title": "Google Summer of Code",
+    "organization": "Google",
+    "category": [
+      "open_source"
+    ],
+    "country": "Global",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Students and beginners to open source, 18+",
+    "tags": [
+      "open source",
+      "git",
+      "programming",
+      "mentorship"
+    ],
+    "summary": "A global program (applications typically open Feb-Mar) offering stipends to contribute to open source projects under an experienced mentor's guidance.",
+    "application_url": "https://summerofcode.withgoogle.com"
+  },
+  {
+    "id": "outreachy",
+    "title": "Outreachy Internship",
+    "organization": "Outreachy",
+    "category": [
+      "open_source",
+      "internship"
+    ],
+    "country": "Global",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Open to people from groups underrepresented in tech; two rounds per year (May & Dec cohorts)",
+    "tags": [
+      "open source",
+      "diversity",
+      "programming",
+      "design",
+      "documentation"
+    ],
+    "summary": "Paid, remote open-source internships with a strong focus on diversity, running twice yearly.",
+    "application_url": "https://www.outreachy.org"
+  },
+  {
+    "id": "mlh-fellowship",
+    "title": "MLH Fellowship",
+    "organization": "Major League Hacking",
+    "category": [
+      "fellowship",
+      "open_source"
+    ],
+    "country": "Global",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "University students and early-career developers",
+    "tags": [
+      "open source",
+      "software engineering",
+      "backend",
+      "web"
+    ],
+    "summary": "A 12-week remote fellowship where participants work in small pods contributing to real open-source codebases.",
+    "application_url": "https://fellowship.mlh.io"
+  },
+  {
+    "id": "devpost-hackathons",
+    "title": "Devpost Hackathons (Rolling)",
+    "organization": "Devpost",
+    "category": [
+      "hackathon"
+    ],
+    "country": "Global",
+    "city": "Remote / Various",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Open to all skill levels; varies by event",
+    "tags": [
+      "hackathon",
+      "prototyping",
+      "teamwork"
+    ],
+    "summary": "The largest hub of ongoing hackathons across every domain — a good way to build portfolio projects and meet recruiters.",
+    "application_url": "https://devpost.com/hackathons",
+    "degreeRequired": false,
+    "skillsBased": true
+  },
+  {
+    "id": "mlh-hackathons",
+    "title": "MLH Hackathons (Rolling)",
+    "organization": "Major League Hacking",
+    "category": [
+      "hackathon"
+    ],
+    "country": "Global",
+    "city": "Remote / Various",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Primarily students, some open to all",
+    "tags": [
+      "hackathon",
+      "student",
+      "networking"
+    ],
+    "summary": "The official student hackathon league, running weekend events year-round in-person and online.",
+    "application_url": "https://mlh.io/seasons/2025/events"
+  },
+  {
+    "id": "unstop-hackathons",
+    "title": "Unstop Hackathons & Competitions",
+    "organization": "Unstop",
+    "category": [
+      "hackathon",
+      "job"
+    ],
+    "country": "India",
+    "city": "Remote / Various",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Students and early professionals in India and globally",
+    "tags": [
+      "hackathon",
+      "competition",
+      "case study",
+      "india"
+    ],
+    "summary": "India's largest platform aggregating hackathons, case competitions, and off-campus job/internship drives.",
+    "application_url": "https://unstop.com"
+  },
+  {
+    "id": "linkedin-jobs",
+    "title": "LinkedIn Jobs — Entry Level Tech Roles",
+    "organization": "LinkedIn",
+    "category": [
+      "job"
+    ],
+    "country": "Global",
+    "city": "Remote / Various",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Open to all experience levels; filter by entry-level",
+    "tags": [
+      "job search",
+      "networking",
+      "full-time"
+    ],
+    "summary": "The largest professional job board — use skill and location filters to find roles matching your resume.",
+    "application_url": "https://www.linkedin.com/jobs"
+  },
+  {
+    "id": "wellfound",
+    "title": "Wellfound (AngelList) Startup Jobs",
+    "organization": "Wellfound",
+    "category": [
+      "job",
+      "internship"
+    ],
+    "country": "Global",
+    "city": "Remote / Various",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Open to all",
+    "tags": [
+      "startup",
+      "job search",
+      "equity",
+      "remote work"
+    ],
+    "summary": "A job board focused on startup roles, often with faster hiring cycles and equity compensation.",
+    "application_url": "https://wellfound.com"
+  },
+  {
+    "id": "google-careers",
+    "title": "Google Careers — University & Entry-Level",
+    "organization": "Google",
+    "category": [
+      "job",
+      "internship"
+    ],
+    "country": "Global",
+    "city": "Various",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Students and recent graduates",
+    "tags": [
+      "software engineering",
+      "big tech",
+      "internship"
+    ],
+    "summary": "Google's official careers page listing university internships and entry-level software engineering roles.",
+    "application_url": "https://careers.google.com/students"
+  },
+  {
+    "id": "microsoft-careers",
+    "title": "Microsoft Careers — Students & Grads",
+    "organization": "Microsoft",
+    "category": [
+      "job",
+      "internship"
+    ],
+    "country": "Global",
+    "city": "Various",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Students and recent graduates",
+    "tags": [
+      "software engineering",
+      "big tech",
+      "cloud",
+      "internship"
+    ],
+    "summary": "Microsoft's early-in-career hub for internships and full-time roles across engineering, PM, and design.",
+    "application_url": "https://careers.microsoft.com/students"
+  },
+  {
+    "id": "amazon-student",
+    "title": "Amazon Student Programs",
+    "organization": "Amazon",
+    "category": [
+      "job",
+      "internship"
+    ],
+    "country": "Global",
+    "city": "Various",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Students and recent graduates",
+    "tags": [
+      "software development engineer",
+      "internship",
+      "big tech"
+    ],
+    "summary": "Amazon's internship and new-grad program listings for SDE, data science, and operations roles.",
+    "application_url": "https://www.amazon.jobs/en/teams/student-programs"
+  },
+  {
+    "id": "gates-cambridge",
+    "title": "Gates Cambridge Scholarship",
+    "organization": "University of Cambridge",
+    "category": [
+      "scholarship"
+    ],
+    "country": "United Kingdom",
+    "city": "Cambridge",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Outstanding non-UK graduate applicants (annual cycle, deadlines vary by country)",
+    "tags": [
+      "scholarship",
+      "graduate study",
+      "research"
+    ],
+    "summary": "A full-cost postgraduate scholarship at Cambridge for outstanding applicants from outside the UK.",
+    "application_url": "https://www.gatescambridge.org"
+  },
+  {
+    "id": "fulbright",
+    "title": "Fulbright Foreign Student Program",
+    "organization": "U.S. Department of State",
+    "category": [
+      "scholarship",
+      "fellowship"
+    ],
+    "country": "United States",
+    "city": "Various",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "International graduate students and young professionals",
+    "tags": [
+      "scholarship",
+      "graduate study",
+      "exchange"
+    ],
+    "summary": "A prestigious international exchange program funding graduate study and research in the United States.",
+    "application_url": "https://foreign.fulbrightonline.org"
+  },
+  {
+    "id": "adplist-mentorship",
+    "title": "ADPList Mentorship",
+    "organization": "ADPList",
+    "category": [
+      "community",
+      "research"
+    ],
+    "country": "Global",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Open to all career stages",
+    "tags": [
+      "mentorship",
+      "career growth",
+      "networking"
+    ],
+    "summary": "A free platform connecting mentees with industry mentors across product, design, and engineering.",
+    "application_url": "https://adplist.org"
+  },
+  {
+    "id": "kaggle-competitions",
+    "title": "Kaggle Competitions",
+    "organization": "Kaggle",
+    "category": [
+      "research",
+      "hackathon"
+    ],
+    "country": "Global",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Open to all skill levels",
+    "tags": [
+      "machine learning",
+      "data science",
+      "competition"
+    ],
+    "summary": "Ongoing data science and machine learning competitions, great for building a public ML portfolio.",
+    "application_url": "https://www.kaggle.com/competitions",
+    "degreeRequired": false,
+    "skillsBased": true
+  },
+  {
+    "id": "ieee-conferences",
+    "title": "IEEE Student Conferences",
+    "organization": "IEEE",
+    "category": [
+      "conference"
+    ],
+    "country": "Global",
+    "city": "Various",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Students and researchers submitting papers or attending",
+    "tags": [
+      "research",
+      "networking",
+      "publishing"
+    ],
+    "summary": "IEEE hosts hundreds of student-friendly technical conferences yearly across every engineering discipline.",
+    "application_url": "https://www.ieee.org/conferences"
+  },
+  {
+    "id": "she-codes",
+    "title": "SheCodes / Women Who Code Programs",
+    "organization": "Women Who Code",
+    "category": [
+      "community",
+      "fellowship"
+    ],
+    "country": "Global",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Women and non-binary individuals in tech",
+    "tags": [
+      "community",
+      "mentorship",
+      "diversity"
+    ],
+    "summary": "A global community offering scholarships, mentorship, and networking events for women in technology.",
+    "application_url": "https://www.womenwhocode.com",
+    "audience": "women"
+  },
+  {
+    "id": "lfx-mentorship",
+    "title": "LFX Mentorship",
+    "organization": "Linux Foundation",
+    "category": [
+      "open_source",
+      "fellowship"
+    ],
+    "country": "Global",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Students and early-career developers interested in open source infrastructure",
+    "tags": [
+      "open source",
+      "cloud native",
+      "linux",
+      "mentorship"
+    ],
+    "summary": "Paid mentorship program contributing to Linux Foundation projects like Kubernetes, CNCF, and Hyperledger.",
+    "application_url": "https://mentorship.lfx.linuxfoundation.org"
+  },
+  {
+    "id": "path-forward",
+    "title": "Path Forward Returnship Matcher",
+    "organization": "Path Forward",
+    "category": [
+      "job"
+    ],
+    "country": "United States",
+    "city": "Remote and multiple cities",
+    "remote": null,
+    "deadline": null,
+    "eligibility": "People returning to paid work after a caregiving break. Free for returners.",
+    "tags": [
+      "returnship",
+      "career break",
+      "caregiving",
+      "networking"
+    ],
+    "summary": "A US nonprofit whose Returnship Matcher lists returnship programmes from partner companies, updated weekly. Signing up is not applying: you apply through each company's own site.",
+    "application_url": "https://pathforward.org/",
+    "returnerFriendly": true,
+    "degreeRequired": "varies",
+    "skillsBased": false
+  },
+  {
+    "id": "intuit-again",
+    "title": "Intuit Again Returnship",
+    "organization": "Intuit",
+    "category": [
+      "internship"
+    ],
+    "country": "India and United States",
+    "city": "Multiple",
+    "remote": null,
+    "deadline": null,
+    "eligibility": "People returning to the workforce after a career break, especially technologists returning after caregiving. Check the official page for current terms.",
+    "tags": [
+      "returnship",
+      "career break",
+      "engineering",
+      "technology"
+    ],
+    "summary": "A structured, paid returnship designed to lead to full-time roles, with a dedicated programme team and fellow returnees. Intuit describes it as a 16-week programme on its careers site.",
+    "application_url": "https://careers.intuit.com/intuit-again",
+    "returnerFriendly": true,
+    "degreeRequired": "varies",
+    "skillsBased": false
+  },
+  {
+    "id": "accenture-career-reboot",
+    "title": "Accenture Career Reboot Program (India)",
+    "organization": "Accenture",
+    "category": [
+      "internship"
+    ],
+    "country": "India",
+    "city": "Multiple",
+    "remote": null,
+    "deadline": null,
+    "eligibility": "Professionals with a career break of over 24 months, per Accenture's FAQ. Check the official page for current terms.",
+    "tags": [
+      "returnship",
+      "career break",
+      "technology",
+      "consulting"
+    ],
+    "summary": "A paid return-to-work programme with tailored learning paths, mentorship and a supportive community. Accenture lets you choose a track based on your skills and experience.",
+    "application_url": "https://www.accenture.com/in-en/careers/local/career-reboot-program",
+    "returnerFriendly": true,
+    "degreeRequired": "varies",
+    "skillsBased": false
+  },
+  {
+    "id": "herkey",
+    "title": "HerKey (formerly JobsForHer)",
+    "organization": "HerKey",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Remote and multiple cities",
+    "remote": null,
+    "deadline": null,
+    "eligibility": "Women at any career stage, including those restarting after a break.",
+    "tags": [
+      "career break",
+      "jobs",
+      "reskilling",
+      "community",
+      "india"
+    ],
+    "summary": "A career platform for women in India that began as a way to return to work after a break and now offers jobs, learning and communities across the career lifecycle.",
+    "application_url": "https://www.herkey.com/",
+    "returnerFriendly": true,
+    "degreeRequired": "varies",
+    "skillsBased": false,
+    "audience": "women"
+  },
+  {
+    "id": "google-career-certificates",
+    "title": "Google Career Certificates",
+    "organization": "Google (Grow with Google)",
+    "category": [
+      "learning"
+    ],
+    "country": "Global",
+    "city": "Online",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "No degree or prior experience required, per Grow with Google.",
+    "tags": [
+      "data analytics",
+      "ux design",
+      "project management",
+      "it support",
+      "certificate"
+    ],
+    "summary": "Self-paced online certificates in fields such as data analytics, UX design, project management and IT support, built to be job-ready in roughly 3 to 6 months of part-time study. Check the official page for the current course list.",
+    "application_url": "https://grow.google/certificates/",
+    "flexible": true,
+    "degreeRequired": false,
+    "skillsBased": true
+  },
+  {
+    "id": "ctet",
+    "title": "CTET: Central Teacher Eligibility Test (India)",
+    "organization": "CBSE",
+    "category": [
+      "learning"
+    ],
+    "country": "India",
+    "city": "Multiple",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Determines eligibility to be appointed as a teacher for Classes 1 to 8. Always check the official site for eligibility and dates.",
+    "tags": [
+      "teaching",
+      "education",
+      "certification",
+      "india"
+    ],
+    "summary": "The national eligibility test for teaching Classes 1 to 8, conducted by CBSE for the Ministry of Education. Notices, eligibility and dates change, so confirm everything on the official site.",
+    "application_url": "https://ctet.nic.in/",
+    "degreeRequired": "varies",
+    "skillsBased": false
+  },
+  {
+    "id": "amazon-10602542",
+    "title": "Software Development Engineer, Customer Experience and Business Trends",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Hyderabad",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 3+ years of relevant experience",
+    "min_years": 3,
+    "tags": [
+      "software engineering"
+    ],
+    "summary": "Software Development Engineer, Customer Experience and Business Trends at Amazon (Hyderabad, India). Skills named in the listing: see the listing.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10602542",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-11",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10594189",
+    "title": "Software Development Engineer II, Amazon Pay",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 2+ years of relevant experience",
+    "min_years": 2,
+    "tags": [
+      "software engineering",
+      "java",
+      "c++"
+    ],
+    "summary": "Software Development Engineer II, Amazon Pay at Amazon (Bengaluru, India). Skills named in the listing: java, c++.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10594189",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-02",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10551515",
+    "title": "Software Dev Engineer I FTC",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 1+ years of relevant experience",
+    "min_years": 1,
+    "tags": [
+      "software engineering"
+    ],
+    "summary": "Software Dev Engineer I FTC at Amazon (Bengaluru, India). Skills named in the listing: see the listing.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10551515",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-09-17",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10602129",
+    "title": "Data Scientist, EU Prime and Marketing Analytics & Science (PRIMAS)",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 1+ years of relevant experience",
+    "min_years": 1,
+    "tags": [
+      "data science",
+      "machine learning",
+      "python",
+      "sql",
+      "spark",
+      "statistics"
+    ],
+    "summary": "Data Scientist, EU Prime and Marketing Analytics & Science (PRIMAS) at Amazon (Bengaluru, India). Skills named in the listing: python, sql, spark, machine learning, statistics.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10602129",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-11",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10593723",
+    "title": "Data Scientist II",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 2+ years of relevant experience",
+    "min_years": 2,
+    "tags": [
+      "data science",
+      "machine learning",
+      "python",
+      "sql",
+      "statistics"
+    ],
+    "summary": "Data Scientist II at Amazon (Bengaluru, India). Skills named in the listing: python, sql, machine learning, statistics.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10593723",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-02",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10602226",
+    "title": "Data Engineer, MIDAS, Digital Acceleration",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Chennai",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 1+ years of relevant experience",
+    "min_years": 1,
+    "tags": [
+      "data science",
+      "software engineering",
+      "python",
+      "sql",
+      "spark",
+      "etl"
+    ],
+    "summary": "Data Engineer, MIDAS, Digital Acceleration at Amazon (Chennai, India). Skills named in the listing: python, sql, spark, etl.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10602226",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-11",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10601582",
+    "title": "Data Engineer I, DSP Analytics",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Hyderabad",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 2+ years of relevant experience",
+    "min_years": 2,
+    "tags": [
+      "data science",
+      "software engineering",
+      "python",
+      "sql",
+      "aws",
+      "spark",
+      "etl"
+    ],
+    "summary": "Data Engineer I, DSP Analytics at Amazon (Hyderabad, India). Skills named in the listing: python, sql, aws, spark, etl.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10601582",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-10",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10596280",
+    "title": "Business Intelligence Engineer I, FCGT",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 2+ years of relevant experience",
+    "min_years": 2,
+    "tags": [
+      "data science",
+      "software engineering",
+      "python",
+      "java",
+      "tableau",
+      "statistics",
+      "excel"
+    ],
+    "summary": "Business Intelligence Engineer I, FCGT at Amazon (Bengaluru, India). Skills named in the listing: python, java, tableau, statistics, excel.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10596280",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-09",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10602691",
+    "title": "Business Intelligence Engineer II, Compliance Shared Services",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 3+ years of relevant experience",
+    "min_years": 3,
+    "tags": [
+      "data science",
+      "software engineering",
+      "python",
+      "sql",
+      "aws",
+      "tableau",
+      "etl",
+      "statistics"
+    ],
+    "summary": "Business Intelligence Engineer II, Compliance Shared Services at Amazon (Bengaluru, India). Skills named in the listing: python, sql, aws, tableau, etl, statistics.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10602691",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-11",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10602090",
+    "title": "Applied Scientist II, Detail Page",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 3+ years of relevant experience",
+    "min_years": 3,
+    "tags": [
+      "data science",
+      "machine learning",
+      "python",
+      "java",
+      "c++"
+    ],
+    "summary": "Applied Scientist II, Detail Page at Amazon (Bengaluru, India). Skills named in the listing: python, java, c++, machine learning.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10602090",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-11",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "amazon-10596351",
+    "title": "Applied Scientist I, Buyer Risk Prevention",
+    "organization": "Amazon",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Experience requirement not stated in the listing",
+    "min_years": null,
+    "tags": [
+      "data science",
+      "machine learning",
+      "python",
+      "java",
+      "c++",
+      "sql"
+    ],
+    "summary": "Applied Scientist I, Buyer Risk Prevention at Amazon (Bengaluru, India). Skills named in the listing: python, java, c++, sql, machine learning.",
+    "application_url": "https://www.amazon.jobs/en/jobs/10596351",
+    "listing_source": "amazon.jobs",
+    "source_date": "2026-11-11",
+    "source_date_kind": "posted",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-okta-8345577",
+    "title": "Senior Software Engineer",
+    "organization": "Okta",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 5+ years of relevant experience",
+    "min_years": 5,
+    "tags": [
+      "software engineering",
+      "javascript",
+      "typescript",
+      "react",
+      "node",
+      "kubernetes",
+      "terraform"
+    ],
+    "summary": "Senior Software Engineer at Okta (Bengaluru, India). Skills named in the listing: javascript, typescript, react, node, kubernetes, terraform.",
+    "application_url": "https://www.okta.com/company/careers/opportunity/8345577?gh_jid=8345577",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-okta-8358353",
+    "title": "Senior Software Engineer - Full Stack Developer",
+    "organization": "Okta",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 5+ years of relevant experience",
+    "min_years": 5,
+    "tags": [
+      "software engineering",
+      "web",
+      "java",
+      "javascript",
+      "react",
+      "go",
+      "aws",
+      "gcp"
+    ],
+    "summary": "Senior Software Engineer - Full Stack Developer at Okta (Bengaluru, India). Skills named in the listing: java, javascript, react, go, aws, gcp.",
+    "application_url": "https://www.okta.com/company/careers/opportunity/8358353?gh_jid=8358353",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-toast-8345741",
+    "title": "Senior Software Engineer, Applied AI",
+    "organization": "Toast",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bangalore",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 5+ years of relevant experience",
+    "min_years": 5,
+    "tags": [
+      "machine learning",
+      "software engineering",
+      "java",
+      "typescript",
+      "kotlin",
+      "llm"
+    ],
+    "summary": "Senior Software Engineer, Applied AI at Toast (Bangalore). Skills named in the listing: java, typescript, kotlin, llm.",
+    "application_url": "https://careers.toasttab.com/jobs?gh_jid=8345741",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-mongodb-8143980",
+    "title": "Application Engineer",
+    "organization": "MongoDB",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 4+ years of relevant experience",
+    "min_years": 4,
+    "tags": [
+      "software engineering",
+      "python",
+      "java",
+      "sql",
+      "mongodb",
+      "aws",
+      "azure"
+    ],
+    "summary": "Application Engineer at MongoDB (Bengaluru). Skills named in the listing: python, java, sql, mongodb, aws, azure.",
+    "application_url": "https://www.mongodb.com/careers/job/?gh_jid=8143980",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-10",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-mongodb-8327106",
+    "title": "Business Systems Analyst 3",
+    "organization": "MongoDB",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Gurugram",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 6+ years of relevant experience",
+    "min_years": 6,
+    "tags": [
+      "data science",
+      "sql",
+      "mongodb",
+      "aws",
+      "azure",
+      "gcp"
+    ],
+    "summary": "Business Systems Analyst 3 at MongoDB (Gurugram). Skills named in the listing: sql, mongodb, aws, azure, gcp.",
+    "application_url": "https://www.mongodb.com/careers/job/?gh_jid=8327106",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-twilio-7781659",
+    "title": "Applications Engineer 2",
+    "organization": "Twilio",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Asks for 3+ years of relevant experience",
+    "min_years": 3,
+    "tags": [
+      "software engineering",
+      "python",
+      "javascript",
+      "sql",
+      "snowflake",
+      "etl",
+      "ci/cd"
+    ],
+    "summary": "Applications Engineer 2 at Twilio (remote, India). Skills named in the listing: python, javascript, sql, snowflake, etl, ci/cd.",
+    "application_url": "https://job-boards.greenhouse.io/twilio/jobs/7781659",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-roblox-8338120",
+    "title": "Quality Analyst",
+    "organization": "Roblox",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Gurugram",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 3+ years of relevant experience",
+    "min_years": 3,
+    "tags": [
+      "data science",
+      "testing",
+      "statistics"
+    ],
+    "summary": "Quality Analyst at Roblox (Gurugram, Haryana, India). Skills named in the listing: statistics, testing.",
+    "application_url": "https://careers.roblox.com/jobs/8338120?gh_jid=8338120",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-roblox-7856888",
+    "title": "Senior Data Analyst - Scaled Moderation",
+    "organization": "Roblox",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Gurugram",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 7+ years of relevant experience",
+    "min_years": 7,
+    "tags": [
+      "data science",
+      "python",
+      "sql",
+      "statistics"
+    ],
+    "summary": "Senior Data Analyst - Scaled Moderation at Roblox (Gurugram, Haryana, India). Skills named in the listing: python, sql, statistics.",
+    "application_url": "https://careers.roblox.com/jobs/7856888?gh_jid=7856888",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-zscaler-5278563007",
+    "title": "Senior AI Platform Engineer",
+    "organization": "Zscaler",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Pune",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 4+ years of relevant experience",
+    "min_years": 4,
+    "tags": [
+      "machine learning",
+      "software engineering",
+      "backend",
+      "python",
+      "aws",
+      "kubernetes",
+      "terraform",
+      "llm"
+    ],
+    "summary": "Senior AI Platform Engineer at Zscaler (Pune, India). Skills named in the listing: python, aws, kubernetes, terraform, machine learning, llm.",
+    "application_url": "https://job-boards.greenhouse.io/zscaler/jobs/5278563007",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-zetaglobal-6252434004",
+    "title": "Senior Backend Engineer",
+    "organization": "Zeta",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bangalore",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 6+ years of relevant experience",
+    "min_years": 6,
+    "tags": [
+      "software engineering",
+      "backend",
+      "python",
+      "java",
+      "kafka",
+      "aws"
+    ],
+    "summary": "Senior Backend Engineer at Zeta (Bangalore, India). Skills named in the listing: python, java, kafka, aws.",
+    "application_url": "https://job-boards.greenhouse.io/zetaglobal/jobs/6252434004",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-zoominfo-8883897002",
+    "title": "Senior Software Engineer",
+    "organization": "ZoomInfo",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Chennai",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 7+ years of relevant experience",
+    "min_years": 7,
+    "tags": [
+      "software engineering",
+      "python",
+      "java",
+      "javascript",
+      "react",
+      "node",
+      "sql"
+    ],
+    "summary": "Senior Software Engineer at ZoomInfo (Chennai, Tamil Nadu, India). Skills named in the listing: python, java, javascript, react, node, sql.",
+    "application_url": "https://www.zoominfo.com/careers?gh_jid=8883897002",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-11",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-gitlab-8928675002",
+    "title": "Senior Backend Engineer, Development Health",
+    "organization": "GitLab",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bangalore",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Experience requirement not stated in the listing",
+    "min_years": null,
+    "tags": [
+      "software engineering",
+      "backend",
+      "ci/cd"
+    ],
+    "summary": "Senior Backend Engineer, Development Health at GitLab (Bangalore, India). Skills named in the listing: ci/cd.",
+    "application_url": "https://job-boards.greenhouse.io/gitlab/jobs/8928675002",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-10",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-gitlab-8867756002",
+    "title": "Site Reliability Engineer, Cells Infrastructure",
+    "organization": "GitLab",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bangalore",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Experience requirement not stated in the listing",
+    "min_years": null,
+    "tags": [
+      "software engineering",
+      "cloud",
+      "typescript",
+      "postgresql",
+      "aws",
+      "gcp",
+      "kubernetes",
+      "terraform"
+    ],
+    "summary": "Site Reliability Engineer, Cells Infrastructure at GitLab (Bangalore, India). Skills named in the listing: typescript, postgresql, aws, gcp, kubernetes, terraform.",
+    "application_url": "https://job-boards.greenhouse.io/gitlab/jobs/8867756002",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-09",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-fivetran-8046982003",
+    "title": "Senior Software Engineer",
+    "organization": "Fivetran",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 5+ years of relevant experience",
+    "min_years": 5,
+    "tags": [
+      "software engineering",
+      "java",
+      "sql",
+      "postgresql",
+      "aws",
+      "azure",
+      "gcp"
+    ],
+    "summary": "Senior Software Engineer at Fivetran (Bengaluru, Karnataka, India). Skills named in the listing: java, sql, postgresql, aws, azure, gcp.",
+    "application_url": "https://www.fivetran.com/careers/job?gh_jid=8046982003",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-10",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-fivetran-8044038003",
+    "title": "Senior Site Reliability Engineer",
+    "organization": "Fivetran",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Experience requirement not stated in the listing",
+    "min_years": null,
+    "tags": [
+      "software engineering",
+      "cloud",
+      "python",
+      "java",
+      "postgresql",
+      "aws",
+      "azure",
+      "gcp"
+    ],
+    "summary": "Senior Site Reliability Engineer at Fivetran (Bengaluru, Karnataka, India). Skills named in the listing: python, java, postgresql, aws, azure, gcp.",
+    "application_url": "https://www.fivetran.com/careers/job?gh_jid=8044038003",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-10",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-coinbase-8165441",
+    "title": "Software Engineer, Security Platform",
+    "organization": "Coinbase",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Asks for 3+ years of relevant experience",
+    "min_years": 3,
+    "tags": [
+      "software engineering",
+      "backend",
+      "cloud",
+      "java",
+      "go",
+      "llm"
+    ],
+    "summary": "Software Engineer, Security Platform at Coinbase (remote, India). Skills named in the listing: java, go, llm.",
+    "application_url": "https://www.coinbase.com/careers/positions/8165441?gh_jid=8165441",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-05",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-coinbase-8325213",
+    "title": "Senior Software Engineer - Data Platform",
+    "organization": "Coinbase",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Remote",
+    "remote": true,
+    "deadline": null,
+    "eligibility": "Asks for 5+ years of relevant experience",
+    "min_years": 5,
+    "tags": [
+      "data science",
+      "software engineering",
+      "backend",
+      "python",
+      "java",
+      "sql",
+      "kafka",
+      "spark",
+      "airflow"
+    ],
+    "summary": "Senior Software Engineer - Data Platform at Coinbase (remote, India). Skills named in the listing: python, java, sql, kafka, spark, airflow.",
+    "application_url": "https://www.coinbase.com/careers/positions/8325213?gh_jid=8325213",
+    "listing_source": "Company careers site",
+    "source_date": "2026-10-30",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-sumologic-8352350",
+    "title": "Senior Software Engineer I",
+    "organization": "Sumo Logic",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Noida",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 4+ years of relevant experience",
+    "min_years": 4,
+    "tags": [
+      "software engineering",
+      "python",
+      "java",
+      "javascript",
+      "node",
+      "go",
+      "aws"
+    ],
+    "summary": "Senior Software Engineer I at Sumo Logic (Noida, Uttar Pradesh, India). Skills named in the listing: python, java, javascript, node, go, aws.",
+    "application_url": "https://job-boards.greenhouse.io/sumologic/jobs/8352350",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-04",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-pubmatic-5466677008",
+    "title": "Business Intelligence Associate",
+    "organization": "PubMatic",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Pune",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 4+ years of relevant experience",
+    "min_years": 4,
+    "tags": [
+      "data science",
+      "python",
+      "machine learning",
+      "statistics"
+    ],
+    "summary": "Business Intelligence Associate at PubMatic (Pune, India). Skills named in the listing: python, machine learning, statistics.",
+    "application_url": "https://pubmatic.com/job/?gh_jid=5466677008",
+    "listing_source": "Company careers site",
+    "source_date": "2026-10-29",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-pubmatic-5173030008",
+    "title": "Senior/Software Engineer - Java (Core Platform, Commerce Media & AQ)",
+    "organization": "PubMatic",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Pune",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 3+ years of relevant experience",
+    "min_years": 3,
+    "tags": [
+      "software engineering",
+      "backend",
+      "python",
+      "java",
+      "javascript",
+      "sql",
+      "docker",
+      "kubernetes"
+    ],
+    "summary": "Senior/Software Engineer - Java (Core Platform, Commerce Media & AQ) at PubMatic (Pune, India). Skills named in the listing: python, java, javascript, sql, docker, kubernetes.",
+    "application_url": "https://pubmatic.com/job/?gh_jid=5173030008",
+    "listing_source": "Company careers site",
+    "source_date": "2026-10-26",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-stripe-8324207",
+    "title": "Processing Cost Analyst",
+    "organization": "Stripe",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 2+ years of relevant experience",
+    "min_years": 2,
+    "tags": [
+      "data science",
+      "python",
+      "sql",
+      "tableau"
+    ],
+    "summary": "Processing Cost Analyst at Stripe (Bengaluru). Skills named in the listing: python, sql, tableau.",
+    "application_url": "https://stripe.com/jobs/search?gh_jid=8324207",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-02",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-airbnb-8081180",
+    "title": "Senior Analyst, Advanced Analytics (Gurugram)",
+    "organization": "Airbnb",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Gurugram",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 5+ years of relevant experience",
+    "min_years": 5,
+    "tags": [
+      "data science",
+      "python",
+      "sql",
+      "spark",
+      "tableau",
+      "llm",
+      "statistics"
+    ],
+    "summary": "Senior Analyst, Advanced Analytics (Gurugram) at Airbnb (Gurugram, India). Skills named in the listing: python, sql, spark, tableau, llm, statistics.",
+    "application_url": "https://careers.airbnb.com/positions/8081180?gh_jid=8081180",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-10",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "gh-databricks-7619810002",
+    "title": "Senior Software Engineer (Infra)",
+    "organization": "Databricks",
+    "category": [
+      "job"
+    ],
+    "country": "India",
+    "city": "Bengaluru",
+    "remote": false,
+    "deadline": null,
+    "eligibility": "Asks for 6+ years of relevant experience",
+    "min_years": 6,
+    "tags": [
+      "software engineering",
+      "cloud",
+      "python",
+      "java",
+      "c++"
+    ],
+    "summary": "Senior Software Engineer (Infra) at Databricks (Bengaluru, India). Skills named in the listing: python, java, c++.",
+    "application_url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7619810002",
+    "listing_source": "Company careers site",
+    "source_date": "2026-11-08",
+    "source_date_kind": "updated",
+    "verified": "2026-11-12"
+  },
+  {
+    "id": "nariyukti-techhack-11",
+    "title": "NariYukti Tech Hack, 11th Edition (24-hour hackathon)",
+    "organization": "ACM-W India, Infosys and KLE Technological University",
+    "category": [
+      "hackathon"
+    ],
+    "country": "India",
+    "city": "Hubballi",
+    "remote": false,
+    "deadline": "2026-11-15",
+    "eligibility": "Women students (undergraduate or postgraduate, any stream). Teams of 2 to 3 women plus one woman faculty mentor.",
+    "audience": "women",
+    "tags": [
+      "hackathon",
+      "open source",
+      "artificial intelligence",
+      "machine learning",
+      "multimodal ai",
+      "women in tech",
+      "student"
+    ],
+    "summary": "ACM-W India's national all-women hackathon, 11th edition: 'Unleash the Weights: Open-Source AI'. Round 1 proposals are due 15 Nov 2026, Round 2 presentations 12 and 13 Dec 2026, and the 24-hour finale is at Infosys Hubballi on 29 and 30 Jan 2027. Prize pool Rs 96,000.",
+    "application_url": "https://forms.gle/MLhNNQhuhHzjSDiYA",
+    "info_url": "https://event.india.acm.org/hackathon",
+    "listing_source": "event.india.acm.org",
+    "source_date": "2026-11-12",
+    "source_date_kind": "verified",
+    "verified": "2026-11-12"
+  }
+]

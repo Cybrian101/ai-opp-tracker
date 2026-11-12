@@ -31,7 +31,7 @@ export function DashboardSkeleton() {
             animate={{ opacity: 1 }}
             transition={{ delay: i * 0.1, duration: 1, repeat: Infinity }}
             className="rounded-xl p-6 border border-white/5"
-            style={{ background: 'linear-gradient(135deg, rgba(30,40,70,0.5), rgba(20,30,60,0.5))' }}
+            style={{ background: 'linear-gradient(135deg, rgb(var(--c-navy-700) / 0.5), rgb(var(--c-navy-800) / 0.5))' }}
           >
             <SkeletonCard className="h-4 w-1/2 mb-4" />
             <SkeletonCard className="h-6 w-3/4 mb-3" />
@@ -47,7 +47,7 @@ export function DashboardSkeleton() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, repeat: Infinity }}
         className="rounded-xl p-6 border border-white/5"
-        style={{ background: 'linear-gradient(135deg, rgba(30,40,70,0.5), rgba(20,30,60,0.5))' }}
+        style={{ background: 'linear-gradient(135deg, rgb(var(--c-navy-700) / 0.5), rgb(var(--c-navy-800) / 0.5))' }}
       >
         <SkeletonCard className="h-6 w-1/3 mb-4" />
         <div className="space-y-3">

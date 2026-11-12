@@ -1,18 +1,13 @@
 import { motion } from 'framer-motion'
 import {
-  Upload, FileSearch, Brain, UserCheck, TrendingUp,
-  Globe, Target, Save, Sparkles, CheckCircle2, Loader2, XCircle,
+  Upload, Brain, TrendingUp, Target, Sparkles, CheckCircle2, Loader2, XCircle,
 } from 'lucide-react'
 
 const PIPELINE_STEPS = [
   { key: 'upload',               label: 'Uploading Resume',          icon: Upload },
-  { key: 'parsing',              label: 'Extracting Text',            icon: FileSearch },
   { key: 'analyzing',            label: 'AI Resume Analysis',         icon: Brain },
-  { key: 'build',                label: 'Building Profile',           icon: UserCheck },
   { key: 'career_analysis',      label: 'Career Intelligence',        icon: TrendingUp },
-  { key: 'opportunity_search',   label: 'Searching Opportunities',    icon: Globe },
   { key: 'opportunity_matching', label: 'Matching Opportunities',     icon: Target },
-  { key: 'saving',               label: 'Saving Report',              icon: Save },
   { key: 'complete_intelligence',label: 'Intelligence Ready',         icon: Sparkles },
 ]
 
@@ -45,12 +40,12 @@ export default function AnalysisProgress({ steps = [] }) {
   const runningStep = steps.find((s) => s.status === 'running')
 
   return (
-    <div className="glass-card rounded-2xl p-8 space-y-6">
+    <div className="p-8 space-y-6 glass-card rounded-2xl">
       <div className="text-center">
-        <h2 className="text-xl font-semibold text-text-primary mb-1">
+        <h2 className="mb-1 text-xl font-semibold text-text-primary">
           Building Your Career Intelligence
         </h2>
-        <p className="text-text-muted text-sm">
+        <p className="text-sm text-text-muted">
           {runningStep
             ? (PIPELINE_STEPS.find((p) => p.key === runningStep.id)?.label || runningStep.label || 'Processing...')
             : progress === 100
@@ -68,7 +63,7 @@ export default function AnalysisProgress({ steps = [] }) {
         <div className="relative h-2.5 bg-white/5 rounded-full overflow-hidden">
           <motion.div
             className="absolute inset-y-0 left-0 rounded-full"
-            style={{ background: 'linear-gradient(90deg, #00d4ff, #7c3aed)' }}
+            style={{ background: 'var(--grad-brand-h)' }}
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -97,7 +92,7 @@ export default function AnalysisProgress({ steps = [] }) {
               }`}
             >
               {/* Icon */}
-              <div className="flex-shrink-0 w-9 h-9 rounded-lg border flex items-center justify-center border-current bg-current/10">
+              <div className="flex items-center justify-center flex-shrink-0 border border-current rounded-lg w-9 h-9 bg-current/10">
                 {isRunning ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
                 ) : isDone ? (
@@ -123,7 +118,7 @@ export default function AnalysisProgress({ steps = [] }) {
 
               {/* Label */}
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-sm">{label}</p>
+                <p className="text-sm font-medium">{label}</p>
                 {isRunning && (
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -133,7 +128,7 @@ export default function AnalysisProgress({ steps = [] }) {
                     {[0, 1, 2].map((i) => (
                       <span
                         key={i}
-                        className="w-1 h-1 rounded-full bg-current animate-bounce"
+                        className="w-1 h-1 bg-current rounded-full animate-bounce"
                         style={{ animationDelay: `${i * 0.15}s` }}
                       />
                     ))}
@@ -149,7 +144,7 @@ export default function AnalysisProgress({ steps = [] }) {
                 <motion.span
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-xs font-semibold flex-shrink-0"
+                  className="flex-shrink-0 text-xs font-semibold"
                 >
                   Done
                 </motion.span>
@@ -158,7 +153,7 @@ export default function AnalysisProgress({ steps = [] }) {
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="text-xs font-semibold flex-shrink-0"
+                  className="flex-shrink-0 text-xs font-semibold"
                 >
                   Error
                 </motion.span>
@@ -171,7 +166,7 @@ export default function AnalysisProgress({ steps = [] }) {
       {/* Footer */}
       <div className="text-center">
         <p className="text-xs text-text-muted">
-          ✨ Powered by Gemini AI — building your complete career intelligence profile
+          ✨ Powered by AI-Ops — building your complete career intelligence profile
         </p>
       </div>
     </div>

@@ -8,9 +8,9 @@ function MatchRing({ percent = 0, size = 72 }) {
   const offset = circumference - (clamped / 100) * circumference
 
   const color =
-    clamped >= 75 ? '#10b981' :
-    clamped >= 50 ? '#f59e0b' :
-    '#64748b'
+    clamped >= 75 ? 'rgb(var(--c-success))' :
+    clamped >= 50 ? 'rgb(var(--c-warning))' :
+    'rgb(var(--c-muted))'
 
   return (
     <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
@@ -20,7 +20,7 @@ function MatchRing({ percent = 0, size = 72 }) {
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="rgba(255,255,255,0.07)"
+          stroke="rgb(var(--c-fg) / calc(0.07 * var(--fg-boost)))"
           strokeWidth={7}
         />
         <motion.circle

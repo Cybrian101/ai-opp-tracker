@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion'
-import { MapPin, Calendar, ExternalLink, Bookmark, BookmarkCheck, Wifi, Filter, Briefcase, GraduationCap, Code, Heart, Award, Users, Search, GitBranch } from 'lucide-react'
+import { MapPin, Calendar, ExternalLink, Bookmark, BookmarkCheck, Wifi, Filter, Briefcase, GraduationCap, Code, Heart, Award, Users, Search, GitBranch, BookOpen } from 'lucide-react'
 import { useState, useMemo } from 'react'
-import { formatDistanceToNow, parseISO, differenceInDays } from 'date-fns'
+import { parseISO, differenceInDays, format } from 'date-fns'
 import useOpportunityStore from '../../stores/opportunityStore'
-import useUserStore from '../../stores/userStore'
-import api from '../../lib/axios'
 
 const CATEGORY_CONFIG = {
   job: { icon: Briefcase, title: 'Recommended Jobs', color: 'text-blue-400 bg-blue-500/10 border-blue-500/20' },
@@ -14,6 +12,8 @@ const CATEGORY_CONFIG = {
   fellowship: { icon: Award, title: 'Recommended Fellowships', color: 'text-amber-400 bg-amber-500/10 border-amber-500/20' },
   conference: { icon: Users, title: 'Recommended Conferences', color: 'text-pink-400 bg-pink-500/10 border-pink-500/20' },
   research: { icon: Search, title: 'Recommended Research Programs', color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20' },
+  learning: { icon: BookOpen, title: 'Learning & Credentials', color: 'text-teal-400 bg-teal-500/10 border-teal-500/20' },
+  community: { icon: Users, title: 'Communities & Networks', color: 'text-rose-400 bg-rose-500/10 border-rose-500/20' },
   open_source: { icon: GitBranch, title: 'Recommended Open Source Programs', color: 'text-orange-400 bg-orange-500/10 border-orange-500/20' }
 }
 
@@ -39,8 +39,7 @@ function OpportunityCard({ opp, isSaved, onSave }) {
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="min-w-[300px] w-[300px] flex-shrink-0 rounded-xl p-4 relative overflow-hidden group hover:border-cyan-500/25 transition-all duration-300 flex flex-col"
-      style={{ background: 'rgba(15,32,64,0.6)', border: '1px solid rgba(255,255,255,0.06)' }}
+      className="min-w-[300px] w-[300px] flex-shrink-0 rounded-xl p-4 relative overflow-hidden group bg-navy-800 border border-white/10 hover:border-accent-cyan/40 transition-all duration-300 flex flex-col"
     >
       <div className="flex items-start justify-between gap-2 mb-2">
         <div className="flex flex-wrap gap-1.5">
@@ -65,6 +64,18 @@ function OpportunityCard({ opp, isSaved, onSave }) {
         </p>
       )}
 
+      {skillGap.length > 0 && (
+        <p className="text-[11px] text-amber-300/90 mb-3">Skill gap to close: {skillGap.join(', ')}</p>
+      )}
+
+      {(opp.returnerFriendly || opp.audience === 'women' || opp.degreeRequired === false || opp.skillsBased) && (
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {opp.audience === 'women' && <span className="badge badge-purple !normal-case">Women-focused</span>}
+          {opp.returnerFriendly && <span className="badge badge-purple !normal-case">Returner-friendly</span>}
+          {(opp.degreeRequired === false || opp.skillsBased) && <span className="badge badge-green !normal-case">Skills-based</span>}
+        </div>
+      )}
+
       {/* Meta */}
       <div className="flex items-center gap-3 flex-wrap mb-4 mt-auto">
         {(opp.city || opp.country) && (
@@ -74,15 +85,20 @@ function OpportunityCard({ opp, isSaved, onSave }) {
           </span>
         )}
         {daysLeft !== null && (
-          <span className={`flex items-center gap-1 text-xs ${daysLeft < 30 ? 'text-green-400' : 'text-text-muted'}`}>
+          <span className={`flex items-center gap-1 text-xs ${daysLeft < 0 ? 'text-red-400' : daysLeft < 30 ? 'text-green-400' : 'text-text-muted'}`}>
             <Calendar size={10} />
-            {daysLeft > 0 ? `${daysLeft}d left` : 'Ongoing'}
+            {daysLeft > 0 ? `${daysLeft}d left` : daysLeft === 0 ? 'Closes today' : 'Closed'}
+          </span>
+        )}
+        {opp.source_date && (
+          <span className="text-[11px] text-text-muted" title={opp.verified ? `Link checked ${format(parseISO(opp.verified), 'd MMM yyyy')}` : undefined}>
+            {opp.source_date_kind === 'posted' ? 'Posted' : opp.source_date_kind === 'updated' ? 'Updated' : 'Checked'} {format(parseISO(opp.source_date), 'd MMM')}
           </span>
         )}
       </div>
 
       {/* Actions */}
-      <div className="flex gap-2 pt-3 border-t border-white/5">
+      <div className="flex gap-2 pt-3 border-t border-white/10">
         <button
           onClick={() => onSave(opp)}
           className={`flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border transition-all ${
@@ -115,8 +131,12 @@ const FILTERS = [
 
 export default function OpportunityMatches({ matches = [] }) {
   const [localMinScore, setLocalMinScore] = useState(0)
-  const { savedOpportunities, toggleSaved, dashboardFilterQuery, dashboardFilterMinScore, setDashboardFilter } = useOpportunityStore()
-  const { user } = useUserStore()
+  const [traitFilters, setTraitFilters] = useState(new Set())
+  const toggleTrait = (key) => setTraitFilters((prev) => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next })
+  const { savedOpportunities, toggleSaved, dashboardFilterQuery, dashboardFilterMinScore, setDashboardFilter, comeback } = useOpportunityStore()
+  // Women-focused programmes appear when the user asks for them (the chip) or has filled in the Returning to work form.
+  // The app never guesses a person's gender from their resume.
+  const showWomen = traitFilters.has('women') || Boolean(comeback)
 
   // Clear filters if user clicks "All"
   const handleClearFilters = () => {
@@ -130,28 +150,28 @@ export default function OpportunityMatches({ matches = [] }) {
   const categorized = useMemo(() => {
     const cats = {
       job: [], internship: [], hackathon: [], scholarship: [],
-      fellowship: [], conference: [], research: [], open_source: []
+      fellowship: [], conference: [], research: [], open_source: [], learning: [], community: []
     }
-    
+
     matches.forEach(m => {
       const score = m.matchScore ?? m.match_score ?? 0
       if (score < effectiveMinScore) return
-      
+      if (m.audience === 'women' && !showWomen) return
+      if (traitFilters.has('degreeFree') && !(m.degreeRequired === false || m.skillsBased)) return
+      if (traitFilters.has('returner') && !m.returnerFriendly) return
+      if (traitFilters.has('flexible') && !(m.flexible || m.remote)) return
+
       if (dashboardFilterQuery) {
          const q = dashboardFilterQuery.toLowerCase()
          const text = `${m.title} ${m.organization} ${m.category} ${m.description} ${m.summary}`.toLowerCase()
          if (!text.includes(q)) return
       }
 
-      const categoryArray = Array.isArray(m.category) ? m.category : [m.category].filter(Boolean)
-      const rawCat = categoryArray[0]?.toLowerCase().replace(/\s+/g, '_') || 'job'
-      
-      // Default fallback
-      if (cats[rawCat]) {
-        cats[rawCat].push(m)
-      } else {
-        cats.job.push(m)
-      }
+      // A programme listed under several categories (e.g. open source + internship) appears in each of them.
+      const keys = (Array.isArray(m.category) ? m.category : [m.category])
+        .map((c) => String(c || '').toLowerCase().replace(/\s+/g, '_'))
+        .filter((c) => cats[c])
+      for (const key of keys.length ? keys : ['job']) cats[key].push(m)
     })
 
     // Sort each array by score
@@ -160,33 +180,24 @@ export default function OpportunityMatches({ matches = [] }) {
     })
 
     return cats
-  }, [matches, effectiveMinScore, dashboardFilterQuery])
+  }, [matches, effectiveMinScore, dashboardFilterQuery, traitFilters, showWomen])
 
-  async function handleSave(opp) {
-    if (!user) return
-    const id = opp.id
-    const isSaved = savedOpportunities.some(s => s.id === id)
-    try {
-      if (isSaved) {
-        await api.delete(`/api/opportunities/${id}/save`, { data: { userId: user.id } })
-      } else {
-        await api.post(`/api/opportunities/${id}/save`, { userId: user.id })
-      }
-      toggleSaved(id)
-    } catch {}
+  function handleSave(opp) {
+    // Client-side only bookmark for this session — nothing is persisted server-side.
+    toggleSaved(opp.id)
   }
 
   const activeCategories = Object.entries(categorized).filter(([_, items]) => items.length > 0)
 
   if (matches.length === 0) {
     return (
-      <div className="glass-card rounded-2xl p-8 text-center space-y-3" style={{ border: '1px solid rgba(0,212,255,0.1)' }}>
+      <div className="glass-card rounded-2xl p-8 text-center space-y-3" style={{ border: '1px solid rgb(var(--c-accent) / calc(0.1 * var(--a-boost)))' }}>
         <div className="w-12 h-12 mx-auto rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center">
           <Briefcase className="w-6 h-6 text-accent-cyan" />
         </div>
-        <h3 className="text-base font-semibold text-text-primary">Discovering Opportunities</h3>
+        <h3 className="text-base font-semibold text-text-primary">No Matches Yet</h3>
         <p className="text-sm text-text-muted">
-          AI is matching opportunities to your profile. Upload your resume to start or wait for analysis to complete.
+          Opportunities are matched to your profile once your resume is analysed. Upload your resume to start, or try the demo.
         </p>
       </div>
     )
@@ -195,7 +206,7 @@ export default function OpportunityMatches({ matches = [] }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between px-2">
-        <h2 className="text-xl font-bold text-text-primary">Discovered Opportunities</h2>
+        <h2 className="text-xl font-bold text-text-primary">Curated Opportunities</h2>
         <div className="flex items-center gap-1.5">
           <Filter size={13} className="text-text-muted" />
           <div className="flex gap-1">
@@ -222,6 +233,19 @@ export default function OpportunityMatches({ matches = [] }) {
         </div>
       </div>
 
+      <div className="flex flex-wrap gap-2 px-2 -mt-2">
+        {[['degreeFree', 'No degree needed / skills-based'], ['returner', 'Returner-friendly'], ['flexible', 'Flexible or remote'], ['women', 'Women-focused programmes']].map(([key, label]) => (
+          <button
+            key={key}
+            onClick={() => toggleTrait(key)}
+            aria-pressed={traitFilters.has(key)}
+            className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${traitFilters.has(key) ? 'bg-purple-500/20 border-purple-500/40 text-purple-200' : 'bg-white/5 border-white/10 text-text-muted hover:bg-white/10'}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
       {activeCategories.length === 0 ? (
         <div className="text-center py-12 text-text-muted text-sm glass-card rounded-2xl">
           No opportunities match your current filter.
@@ -239,7 +263,7 @@ export default function OpportunityMatches({ matches = [] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="glass-card rounded-2xl p-5"
-                style={{ border: '1px solid rgba(0,212,255,0.1)' }}
+                style={{ border: '1px solid rgb(var(--c-accent) / calc(0.1 * var(--a-boost)))' }}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center border ${config.color}`}>
